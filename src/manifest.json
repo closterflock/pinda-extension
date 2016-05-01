@@ -1,0 +1,54 @@
+{
+  "manifest_version": 2,
+  "name": "Care About Us",
+  "description": "",
+  "version": "0.2",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "fonts/*.ttf",
+    "img/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://google.com/*",
+        "https://www.google.com/*"
+      ],
+      "css": [
+        "css/app.css"
+      ],
+      "js": [
+        "normal-search.js",
+        "shopping-page.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://bestbuy.com/site/*",
+        "http://www.bestbuy.com/site/*"
+      ],
+      "css": [
+        "css/app.css"
+      ],
+      "js": [
+        "bestbuy.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "https://192.168.10.10/"
+  ]
+}
