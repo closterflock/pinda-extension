@@ -31,7 +31,7 @@ var paths = {
     },
     dest: {
         dir: './dest/',
-        js: './dest/',
+        js: './dest/js/',
         css: './dest/css/'
     }
 };
