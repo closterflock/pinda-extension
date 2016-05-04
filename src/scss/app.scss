@@ -1,0 +1,99 @@
+//Settings
+$headerFontColor: #5585B5;
+$textFontColor: #53A8B6;
+$linkFontColor: #5585B5;
+$linkHoverFontColor: #79C2D0;
+
+html, body {
+  background-color: #eee;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+html, body {
+  color: $textFontColor;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $headerFontColor;
+}
+
+a {
+  text-decoration: none;
+  color: $linkFontColor;
+  &:hover {
+    color: $linkHoverFontColor;
+  }
+}
+
+//Tools
+
+//Generic
+
+//Base
+
+//Objects
+
+//Components
+
+.search-bar {
+  label {
+    font-size: 1.5em;
+    color: $headerFontColor;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+  }
+
+  input {
+    font-size: .66em;
+    border: none;
+    outline: none;
+    border: 0;
+    padding: .5em;
+    border-radius: .6em;
+  }
+}
+
+.result-list {
+
+  .results {
+    padding: 0;
+  }
+
+  .result {
+    padding: .5em;
+    border: 1px solid #777;
+    border-radius:1em;
+    margin: .5em 0;
+
+    .title {
+      margin: 0 0 .5em;
+    }
+
+    .description {
+      margin-top: 0;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+
+      .tag {
+        flex-grow: 1;
+        text-align: center;
+        padding: .25em;
+        margin: .2em;
+        border-radius: .5em;
+        background-color: #6DF1CC;
+        color: #894949;
+        font-weight: bold;
+      }
+    }
+
+  }
+}
