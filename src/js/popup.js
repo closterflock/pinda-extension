@@ -1,6 +1,11 @@
 'use strict';
 
 var Vue = require('vue');
+Vue.use(require('vue-resource'));
+
+var ChromeStorage = require('./chrome-storage');
+
+var AuthForm = require('./components/AuthForm.vue');
 var SearchBar = require('./components/SearchBar.vue');
 var ResultList = require('./components/ResultList.vue');
 
@@ -40,7 +45,8 @@ new Vue({
     },
     components: {
         'search-bar': SearchBar,
-        'result-list': ResultList
+        'result-list': ResultList,
+        'auth-form': AuthForm
     },
     methods: {
         onTermChange: function (term) {
