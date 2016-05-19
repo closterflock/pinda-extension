@@ -19,7 +19,8 @@
   "homepage": "https://github.com/closterflock/pinda-extension#readme",
   "dependencies": {
     "gulp-autoprefixer": "^3.1.0",
-    "vue": "^1.0.21-csp"
+    "vue": "^1.0.21-csp",
+    "vue-resource": "^0.7.0"
   },
   "devDependencies": {
     "babel-plugin-transform-runtime": "^6.7.5",
