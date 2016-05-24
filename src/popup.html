@@ -6,9 +6,11 @@
     <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-    <auth-form></auth-form>
-    <!--<search-bar :on-term-change="onTermChange"></search-bar>-->
-    <!--<result-list :links="links"></result-list>-->
+    <auth-form v-show="!loggedIn" :on-login="onLogin"></auth-form>
+    <div class="logged-in" v-show="loggedIn">
+        <search-bar :on-term-change="onTermChange"></search-bar>
+        <result-list :links="links"></result-list>
+    </div>
     <script src="js/popup.js"></script>
 </body>
 </html>

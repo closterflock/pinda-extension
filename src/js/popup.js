@@ -40,6 +40,7 @@ new Vue({
                     ]
                 }
             ],
+            loggedIn: false,
             links: []
         };
     },
@@ -81,6 +82,11 @@ new Vue({
             }
             console.log('checking ' + needle + ' vs ' + haystack);
             return haystack.toLowerCase().indexOf(needle.toLowerCase()) > -1;
+        },
+        onLogin: function (token) {
+            console.log(token);
+            this.token = token;
+            this.loggedIn = true;
         }
     }
 });

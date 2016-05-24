@@ -32,9 +32,13 @@
                 isRegistration: false
             }
         },
+        props: [
+            'onLogin'
+        ],
         methods: {
             onSubmit: function (e) {
-                console.log('submitted!');
+                console.log('submitted');
+                this.onLogin('12345');
             }
         }
     }
