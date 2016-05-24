@@ -117,8 +117,8 @@ label {
 }
 
 input {
-  font-size: .75em;
-  padding: .45em;
+  font-size: 1.125em;
+  padding: .25em .45em;
   outline: none;
   border: none;
   border-radius: .3em;
@@ -160,7 +160,6 @@ button {
 
 .search-bar {
   label {
-    font-size: 1.5em;
     color: $bannerFontColor;
     cursor: pointer;
     width: 100%;
@@ -168,7 +167,6 @@ button {
   }
 
   input {
-    font-size: .66em;
     border: none;
     outline: none;
     border: 0;
@@ -208,8 +206,6 @@ button {
         padding: .25em;
         margin: .2em;
         border-radius: .5em;
-        //background-color: #6DF1CC;
-        //color: #894949;
         font-weight: bold;
       }
     }
