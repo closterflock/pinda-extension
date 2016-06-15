@@ -20,12 +20,15 @@ new Vue({
                     url: 'http://kotaku.com',
                     tags: [
                         {
+                            id: 4,
                             name: 'gaming'
                         },
                         {
+                            id: 17,
                             name: 'kinja'
                         },
                         {
+                            id: 18,
                             name: 'blog'
                         }
                     ]
@@ -35,12 +38,17 @@ new Vue({
                     url: 'http://facebook.com',
                     tags: [
                         {
+                            id: 25,
                             name: 'social media'
+                        },
+                        {
+                            id: 35,
+                            name: 'blog'
                         }
                     ]
                 }
             ],
-            loggedIn: false,
+            loggedIn: true,
             links: []
         };
     },
@@ -54,8 +62,18 @@ new Vue({
             this.links = this.searchForTerm(term);
             console.log(this.links);
         },
+        termIsTagSearch: function (term) {
+            return (term.match(/\[tag=(.+)\]/g));
+        },
         searchForTerm: function (term) {
             var self = this;
+
+            if (self.termIsTagSearch(term)) {
+                var expression = new RegExp(/\[tag=(.+)\]/g);
+                var matches = expression.exec(term);
+                term = matches[1];
+            }
+
             return this.data.filter(function (link) {
                 if (self.checkForMatch(term, link.title)) {
                     console.log('title matches.');
@@ -75,6 +93,19 @@ new Vue({
                     })
                 );
             });
+        },
+        prepareTagSearch: function (tag) {
+            return '[tag=' + tag + ']';
+        },
+        onClickedTag: function (name) {
+            console.log('name = ' + name);
+            console.log(name);
+            this.$refs.searchBar.setSearch(this.prepareTagSearch(name), true);
+            // this.links = this.data.filter(function (link) {
+            //     return link.tags.some(function (tag) {
+            //         return (tagId === tag.id);
+            //     });
+            // });
         },
         checkForMatch: function (needle, haystack) {
             if (typeof haystack === 'undefined' || typeof needle === 'undefined') {

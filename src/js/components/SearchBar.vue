@@ -1,9 +1,7 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="search-bar">
-        <label>
-            Search
-            <input v-on:keyup="onKeyUp | debounce 500" v-model="term" type="text" name="search"/>
-        </label>
+        <h2>Search</h2>
+        <input v-on:keyup="onKeyUp | debounce 500" v-model="term" type="text" name="search"/>
     </div>
 </template>
 
@@ -21,6 +19,14 @@
             onKeyUp: function () {
                 if (this.term !== '') {
                     this.onTermChange(this.term);
+                }
+            },
+            setSearch: function (value, searchOnValue) {
+                searchOnValue = searchOnValue || false;
+                this.term = value;
+
+                if (searchOnValue) {
+                    this.onKeyUp();
                 }
             }
         }

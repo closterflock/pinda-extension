@@ -5,7 +5,7 @@ $backgroundColor: #e6e6e6;
 $bannerBackgroundColor: #304964;
 $bannerFontColor: #f6b108;
 $mainFont: 'Raleway', sans-serif;
-$buttonColor: #d57f00;
+$accentColor: #d57f00;
 
 /**
  * Tools
@@ -83,8 +83,8 @@ html {
 }
 
 body {
-  margin: 0;
-  width:200px;
+  margin: 10px;
+  width: 200px;
 }
 
 /**
@@ -137,8 +137,8 @@ button {
   border: none;
   border-radius: .4em;
   padding: .75em;
-  color:$backgroundColor;
-  background-color: $buttonColor;
+  color: $backgroundColor;
+  background-color: $accentColor;
   font-size: 1em;
   margin: .75em auto;
   cursor: pointer;
@@ -162,20 +162,13 @@ ul {
  * Components
  */
 
-
 .search-bar {
-  label {
-    color: $bannerFontColor;
-    cursor: pointer;
-    width: 100%;
-    display: block;
-  }
-
   input {
     border: none;
     outline: none;
     border: 0;
-    padding: .5em;
+    padding: .5em 5%;
+    width: 90%;
     border-radius: .6em;
   }
 }
@@ -189,11 +182,20 @@ ul {
   .result {
     padding: .5em;
     border: 1px solid #777;
-    border-radius:1em;
+    border-radius: 1em;
     margin: .5em 0;
 
     .title {
       margin: 0 0 .5em;
+
+      a {
+        color: $accentColor;
+        font-weight: bold;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
     }
 
     .description {
@@ -206,12 +208,15 @@ ul {
       align-items: center;
 
       .tag {
+        cursor: pointer;
+        color: white;
         flex-grow: 1;
         text-align: center;
         padding: .25em;
         margin: .2em;
         border-radius: .5em;
         font-weight: bold;
+        background: $accentColor;
       }
     }
 

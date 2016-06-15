@@ -8,8 +8,8 @@
 <body>
     <auth-form v-show="!loggedIn" :on-login="onLogin"></auth-form>
     <div class="logged-in" v-show="loggedIn">
-        <search-bar :on-term-change="onTermChange"></search-bar>
-        <result-list :links="links"></result-list>
+        <search-bar v-ref:search-bar :on-term-change="onTermChange"></search-bar>
+        <result-list v-ref:result-list :links="links" :on-clicked-tag="onClickedTag"></result-list>
     </div>
     <script src="js/popup.js"></script>
 </body>

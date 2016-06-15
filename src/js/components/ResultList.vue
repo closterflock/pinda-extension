@@ -14,7 +14,7 @@
                     {{link.description}}
                 </p>
                 <ul class="tag-list">
-                    <li class="tag" v-for="tag in link.tags">
+                    <li class="tag" v-for="tag in link.tags" v-on:click.prevent="clickTag(tag)">
                         {{tag.name}}
                     </li>
                 </ul>
@@ -26,11 +26,15 @@
 <script>
     export default {
         props: [
-            'links'
+            'links',
+            'onClickedTag'
         ],
         methods: {
             showResults: function (links) {
                 this.links = links;
+            },
+            clickTag: function (tag) {
+                this.onClickedTag(tag.name);
             }
         }
     }
