@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-    <auth-form v-show="!loggedIn" :on-login="onLogin"></auth-form>
+    <auth-form v-ref:auth-form v-show="!loggedIn" :on-submit="attemptLogin"></auth-form>
     <div class="logged-in" v-show="loggedIn">
         <search-bar v-ref:search-bar :on-term-change="onTermChange"></search-bar>
         <result-list v-ref:result-list :links="links" :on-clicked-tag="onClickedTag"></result-list>
