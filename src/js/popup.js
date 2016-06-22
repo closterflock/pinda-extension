@@ -14,41 +14,6 @@ ChromeStorage.getAccessToken().then(function (authToken) {
         el: 'body',
         data: function () {
             return {
-                data: [
-                    {
-                        title: 'Kotaku',
-                        description: 'Kotaku\'s main page.',
-                        url: 'http://kotaku.com',
-                        tags: [
-                            {
-                                id: 4,
-                                name: 'gaming'
-                            },
-                            {
-                                id: 17,
-                                name: 'kinja'
-                            },
-                            {
-                                id: 18,
-                                name: 'blog'
-                            }
-                        ]
-                    },
-                    {
-                        title: 'Facebook',
-                        url: 'http://facebook.com',
-                        tags: [
-                            {
-                                id: 25,
-                                name: 'social media'
-                            },
-                            {
-                                id: 35,
-                                name: 'blog'
-                            }
-                        ]
-                    }
-                ],
                 loggedIn: typeof authToken !== 'undefined',
                 links: []
             };
@@ -68,32 +33,61 @@ ChromeStorage.getAccessToken().then(function (authToken) {
             },
             searchForTerm: function (term) {
                 var self = this;
+                self
+                    .$http
+                    .get('http://pinda/app/api/v1/links/search', {term: term})
+                    .then(function (response) {
+                        console.log(response.data);
+                    });
 
-                if (self.termIsTagSearch(term)) {
-                    var expression = new RegExp(/\[tag=(.+)\]/g);
-                    var matches = expression.exec(term);
-                    term = matches[1];
-                }
+                // if (self.termIsTagSearch(term)) {
+                //     var expression = new RegExp(/\[tag=(.+)\]/g);
+                //     var matches = expression.exec(term);
+                //     term = matches[1];
+                // }
+                //
+                // return this.data.filter(function (link) {
+                //     if (self.checkForMatch(term, link.title)) {
+                //         console.log('title matches.');
+                //     }
+                //
+                //     if (self.checkForMatch(term, link.description)) {
+                //         console.log('description');
+                //     }
+                //
+                //     return (
+                //         self.checkForMatch(term, link.title)
+                //         ||
+                //         self.checkForMatch(term, link.description)
+                //         ||
+                //         link.tags.some(function (tag) {
+                //             return self.checkForMatch(term, tag.name);
+                //         })
+                //     );
+                // });
+            },
+            attemptLogin: function (email, password) {
+                var self = this;
+                self
+                    .$http
+                    .post('http://pinda.app/api/v1/login', {email: email, password: password})
+                    .then(function (response) {
+                        console.log(response.data.data);
+                        ChromeStorage.setAccessToken(response.data.data.token).then(function () {
+                            ChromeStorage.getAccessToken().then(function (token) {
+                                console.log('token = ');
+                                console.log(token);
+                            });
+                        }).catch(function (e) {
+                            console.log(e);
+                        });
+                        self.loggedIn = true;
+                        // console.log(response);
+                    }).catch(function (response) {
+                        console.log('error here');
+                        console.log(response.data);
+                    });
 
-                return this.data.filter(function (link) {
-                    if (self.checkForMatch(term, link.title)) {
-                        console.log('title matches.');
-                    }
-
-                    if (self.checkForMatch(term, link.description)) {
-                        console.log('description');
-                    }
-
-                    return (
-                        self.checkForMatch(term, link.title)
-                        ||
-                        self.checkForMatch(term, link.description)
-                        ||
-                        link.tags.some(function (tag) {
-                            return self.checkForMatch(term, tag.name);
-                        })
-                    );
-                });
             },
             prepareTagSearch: function (tag) {
                 return '[tag=' + tag + ']';
@@ -102,11 +96,6 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 console.log('name = ' + name);
                 console.log(name);
                 this.$refs.searchBar.setSearch(this.prepareTagSearch(name), true);
-                // this.links = this.data.filter(function (link) {
-                //     return link.tags.some(function (tag) {
-                //         return (tagId === tag.id);
-                //     });
-                // });
             },
             checkForMatch: function (needle, haystack) {
                 if (typeof haystack === 'undefined' || typeof needle === 'undefined') {
@@ -114,11 +103,6 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 }
                 console.log('checking ' + needle + ' vs ' + haystack);
                 return haystack.toLowerCase().indexOf(needle.toLowerCase()) > -1;
-            },
-            onLogin: function (token) {
-                console.log(token);
-                this.token = token;
-                this.loggedIn = true;
             }
         }
     });

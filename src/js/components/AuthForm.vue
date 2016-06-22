@@ -1,5 +1,5 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
-    <form class="auth-form" v-on:submit.prevent="onSubmit">
+    <form class="auth-form" v-on:submit.prevent="submitForm">
         <h2>
             Sign {{isRegistration ? 'Up' : 'In'}}
         </h2>
@@ -29,16 +29,17 @@
     export default {
         data: function () {
             return {
+                email: undefined,
+                password: undefined,
                 isRegistration: false
             }
         },
         props: [
-            'onLogin'
+            'onSubmit'
         ],
         methods: {
-            onSubmit: function (e) {
-                console.log('submitted');
-                this.onLogin('12345');
+            submitForm: function (e) {
+                this.onSubmit(this.email, this.password);
             }
         }
     }
