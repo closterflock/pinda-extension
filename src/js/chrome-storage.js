@@ -26,9 +26,9 @@ ChromeStorage.prototype.store = function (data) {
  * @returns {Promise}
  */
 ChromeStorage.prototype.set = function (key, value) {
-    return this.store({
-        key: value
-    });
+    var data = {};
+    data[key] = value;
+    return this.store(data);
 };
 
 /**
