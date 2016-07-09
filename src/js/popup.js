@@ -10,6 +10,7 @@ var SearchBar = require('./components/SearchBar.vue');
 var ResultList = require('./components/ResultList.vue');
 
 ChromeStorage.getAccessToken().then(function (authToken) {
+    Vue.http.headers.common['X-Auth-Token'] = authToken;
     new Vue({
         el: 'body',
         data: function () {
@@ -35,36 +36,12 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 var self = this;
                 self
                     .$http
-                    .get('http://pinda/app/api/v1/links/search', {term: term})
+                    .get('http://pinda.app/api/v1/links/search', {term: term})
                     .then(function (response) {
+                        var data = response.data.data;
                         console.log(response.data);
+                        self.links = data.links;
                     });
-
-                // if (self.termIsTagSearch(term)) {
-                //     var expression = new RegExp(/\[tag=(.+)\]/g);
-                //     var matches = expression.exec(term);
-                //     term = matches[1];
-                // }
-                //
-                // return this.data.filter(function (link) {
-                //     if (self.checkForMatch(term, link.title)) {
-                //         console.log('title matches.');
-                //     }
-                //
-                //     if (self.checkForMatch(term, link.description)) {
-                //         console.log('description');
-                //     }
-                //
-                //     return (
-                //         self.checkForMatch(term, link.title)
-                //         ||
-                //         self.checkForMatch(term, link.description)
-                //         ||
-                //         link.tags.some(function (tag) {
-                //             return self.checkForMatch(term, tag.name);
-                //         })
-                //     );
-                // });
             },
             attemptLogin: function (email, password) {
                 var self = this;
@@ -73,7 +50,9 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                     .post('http://pinda.app/api/v1/login', {email: email, password: password})
                     .then(function (response) {
                         console.log(response.data.data);
-                        ChromeStorage.setAccessToken(response.data.data.token).then(function () {
+                        var token = response.data.data.token;
+                        Vue.http.headers.common['X-Auth-Token'] = token;
+                        ChromeStorage.setAccessToken(token).then(function () {
                             ChromeStorage.getAccessToken().then(function (token) {
                                 console.log('token = ');
                                 console.log(token);
