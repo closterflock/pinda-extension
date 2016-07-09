@@ -8,6 +8,7 @@ var ChromeStorage = require('./chrome-storage');
 var AuthForm = require('./components/AuthForm.vue');
 var SearchBar = require('./components/SearchBar.vue');
 var ResultList = require('./components/ResultList.vue');
+var NewLink = require('./components/NewLink.vue');
 
 ChromeStorage.getAccessToken().then(function (authToken) {
     Vue.http.headers.common['X-Auth-Token'] = authToken;
@@ -16,13 +17,15 @@ ChromeStorage.getAccessToken().then(function (authToken) {
         data: function () {
             return {
                 loggedIn: typeof authToken !== 'undefined',
-                links: []
+                links: [],
+                linkForm: false
             };
         },
         components: {
             'search-bar': SearchBar,
             'result-list': ResultList,
-            'auth-form': AuthForm
+            'auth-form': AuthForm,
+            'new-link': NewLink
         },
         methods: {
             onTermChange: function (term) {
@@ -82,6 +85,9 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 }
                 console.log('checking ' + needle + ' vs ' + haystack);
                 return haystack.toLowerCase().indexOf(needle.toLowerCase()) > -1;
+            },
+            newLink: function () {
+                this.linkForm = true;
             }
         }
     });
