@@ -1,7 +1,7 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div class="search-bar">
         <h2>Search</h2>
-        <input v-on:keyup="onKeyUp | debounce 500" v-model="term" type="text" name="search"/>
+        <input v-on:keyup="onKeyUp | debounce 750" v-model="term" type="text" name="search"/>
     </div>
 </template>
 
