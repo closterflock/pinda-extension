@@ -92,3 +92,10 @@ ChromeStorage.getAccessToken().then(function (authToken) {
         }
     });
 });
+
+//Click listener for hamburger menu
+var hamburger = document.querySelector('.hamburger-wrapper');
+hamburger.addEventListener('click', function (e) {
+    e.preventDefault();
+    this.classList.toggle('active');
+});
