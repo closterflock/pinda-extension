@@ -1,14 +1,15 @@
 /**
- * Settings
+*Settings
  */
 $backgroundColor: #e6e6e6;
 $bannerBackgroundColor: #304964;
 $bannerFontColor: #f6b108;
 $mainFont: 'Raleway', sans-serif;
 $accentColor: #d57f00;
+$hamburgerMenuColor: #000;
 
 /**
- * Tools
+*Tools
  */
 
 @mixin clear {
@@ -20,7 +21,7 @@ $accentColor: #d57f00;
 }
 
 /**
- * Generic
+*Generic
  */
 @font-face {
   font-family: 'Raleway';
@@ -88,7 +89,7 @@ body {
 }
 
 /**
- * Base
+*Base
  */
 
 h1, h2, h3 {
@@ -150,7 +151,7 @@ ul {
 }
 
 /**
- * Objects
+*Objects
  */
 
 .margin {
@@ -159,8 +160,48 @@ ul {
 }
 
 /**
- * Components
+*Components
  */
+
+.hamburger {
+  transition: rotate .2s ease;
+  cursor: pointer;
+  margin-top: 1.245em;
+  float: right;
+  position: relative;
+  display: inline-block;
+  width: 1.625em;
+  height: 1.04em;
+  margin-right: 0.39em;
+  border-top: 0.26em solid $hamburgerMenuColor;
+  border-bottom: 0.26em solid $hamburgerMenuColor;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0.39em;
+    left: 0;
+    width: 100%;
+    border-top: 0.26em solid $hamburgerMenuColor;
+  }
+
+  &:active {
+    transform: rotate(-45deg);
+    border-bottom: none;
+    margin-top: 1.8em;
+    margin-right: 0;
+
+    &:before {
+      transform: rotate(90deg);
+      top: -.17em;
+    }
+  }
+}
+
+#search-header {
+  float: left;
+  width: 50%;
+}
 
 .search-bar {
   input {
@@ -239,5 +280,5 @@ ul {
 }
 
 /**
- * Trumps
+*Trumps
  */
