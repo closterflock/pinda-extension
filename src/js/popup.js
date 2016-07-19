@@ -3,6 +3,11 @@
 var Vue = require('vue');
 Vue.use(require('vue-resource'));
 
+Vue.directive('opaque', function (value) {
+    this.el.style.opacity = (value ? '1' : '0');
+    // this.el.style.opacity = (opacity === '1' ? '0' : '1');
+});
+
 var ChromeStorage = require('./chrome-storage');
 
 var AuthForm = require('./components/AuthForm.vue');

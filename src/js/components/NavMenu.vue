@@ -1,10 +1,10 @@
-<template xmlns:v-on="http://www.w3.org/1999/xhtml">
+<template xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
     <div class="hamburger-wrapper " v-on:click.prevent="toggleNav" v-bind:class="{ 'active': active }">
         <div class="hamburger"></div>
     </div>
-    <nav class="hamburger-nav" style="opacity: 0">
+    <nav class="hamburger-nav" v-opaque="active">
         <ul class="nav">
-            <li class="item">Logout</li>
+            <li class="item" v-on:click.prevent="logout">Logout</li>
         </ul>
     </nav>
 </template>
@@ -16,15 +16,14 @@
                 active: false
             }
         },
+        props: ['onLogout'],
         methods: {
             toggleNav: function () {
-//                console.log(this.$el);
                 this.active = !(this.active);
-                var nav = this.$el.nextElementSibling.nextElementSibling;
-//                var nav = document.querySelector('.hamburger-nav');
-                var opacity = nav.style.opacity;
-                console.log(nav);
-                nav.style.opacity = (opacity === '1' ? '0' : '1');
+            },
+            logout: function () {
+                this.active = false;
+                this.onLogout();
             }
         }
     }
