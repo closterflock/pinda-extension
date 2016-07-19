@@ -25,10 +25,17 @@
 
 <script>
     export default {
-        props: [
-            'links',
-            'onClickedTag'
-        ],
+        props: {
+            onClickedTag: {
+                type: Function
+            },
+            links: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        },
         methods: {
             showResults: function (links) {
                 this.links = links;
