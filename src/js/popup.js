@@ -91,7 +91,9 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 this.linkForm = true;
             },
             onLogout: function () {
-                VueSettings.clearAuthTokenHeader();
+                this.$http.delete('http://pinda.app/api/v1/logout').then(function () {
+                    VueSettings.clearAuthTokenHeader();
+                });
                 ChromeStorage.clearAccessToken();
                 this.loggedIn = false;
             }
