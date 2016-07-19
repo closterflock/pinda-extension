@@ -213,11 +213,11 @@ ul {
       }
 
       &:before {
-        transform: rotate(-315deg);
+        transform: rotate(-225deg);
       }
 
       &:after {
-        transform: rotate(315deg);
+        transform: rotate(225deg);
       }
     }
   }
