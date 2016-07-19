@@ -1,5 +1,6 @@
 'use strict';
 
+var Vue = require('vue');
 var VueSettings = require('./vue-settings');
 var ChromeStorage = require('./chrome-storage');
 
