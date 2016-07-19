@@ -163,37 +163,62 @@ ul {
 *Components
  */
 
-.hamburger {
-  transition: rotate .2s ease;
+.hamburger-wrapper {
   cursor: pointer;
-  margin-top: 1.245em;
+  margin-top: 1.3em;
+  margin-right: .75em;
   float: right;
   position: relative;
   display: inline-block;
-  width: 1.625em;
-  height: 1.04em;
-  margin-right: 0.39em;
-  border-top: 0.26em solid $hamburgerMenuColor;
-  border-bottom: 0.26em solid $hamburgerMenuColor;
+  min-width: 10%;
+  height: 1.67em;
 
-  &:before {
-    content: "";
+  .hamburger {
+    transition: background .3s ease;
     position: absolute;
-    top: 0.39em;
-    left: 0;
-    width: 100%;
-    border-top: 0.26em solid $hamburgerMenuColor;
-  }
+    top: 50%;
 
-  &:active {
-    transform: rotate(-45deg);
-    border-bottom: none;
-    margin-top: 1.8em;
-    margin-right: 0;
+    width: 100%;
+    height: 2px;
+
+    background-color: $hamburgerMenuColor;
+
+    &:before, &:after {
+      transition: all .3s ease;
+      content: "";
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      left: 0;
+      background-color: $hamburgerMenuColor;
+    }
 
     &:before {
-      transform: rotate(90deg);
-      top: -.17em;
+      top: -8px;
+    }
+
+    &:after {
+      bottom: -8px;
+    }
+  }
+
+
+  &:hover {
+    .hamburger {
+      background: transparent;
+
+      &:before, &:after {
+        top: 0;
+        bottom: 0;
+      }
+
+      &:before {
+        transform: rotate(-315deg);
+      }
+
+      &:after {
+        transform: rotate(315deg);
+      }
     }
   }
 }
