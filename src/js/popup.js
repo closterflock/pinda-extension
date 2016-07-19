@@ -1,13 +1,6 @@
 'use strict';
 
-var Vue = require('vue');
-Vue.use(require('vue-resource'));
-
-Vue.directive('opaque', function (value) {
-    this.el.style.opacity = (value ? '1' : '0');
-    // this.el.style.opacity = (opacity === '1' ? '0' : '1');
-});
-
+var VueSettings = require('./vue-settings');
 var ChromeStorage = require('./chrome-storage');
 
 var AuthForm = require('./components/AuthForm.vue');
@@ -17,7 +10,7 @@ var NewLink = require('./components/NewLink.vue');
 var NavMenu = require('./components/NavMenu.vue');
 
 ChromeStorage.getAccessToken().then(function (authToken) {
-    Vue.http.headers.common['X-Auth-Token'] = authToken;
+    VueSettings.setAuthTokenHeader(authToken);
     new Vue({
         el: 'body',
         data: function () {
@@ -61,7 +54,7 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                     .then(function (response) {
                         console.log(response.data.data);
                         var token = response.data.data.token;
-                        Vue.http.headers.common['X-Auth-Token'] = token;
+                        VueSettings.setAuthTokenHeader(token);
                         ChromeStorage.setAccessToken(token).then(function () {
                             ChromeStorage.getAccessToken().then(function (token) {
                                 console.log('token = ');
@@ -97,6 +90,7 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 this.linkForm = true;
             },
             onLogout: function () {
+                VueSettings.clearAuthTokenHeader();
                 ChromeStorage.clearAccessToken();
                 this.loggedIn = false;
             }
