@@ -71,4 +71,8 @@ ChromeStorage.prototype.setAccessToken = function (value) {
     return this.set(this._accessTokenKey, value);
 };
 
+ChromeStorage.prototype.clearAccessToken = function () {
+    return this.set(this._accessTokenKey, '');
+};
+
 module.exports = new ChromeStorage();

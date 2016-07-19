@@ -97,7 +97,8 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 this.linkForm = true;
             },
             onLogout: function () {
-                console.log('LOGGING OUT!');
+                ChromeStorage.clearAccessToken();
+                this.loggedIn = false;
             }
         }
     });
