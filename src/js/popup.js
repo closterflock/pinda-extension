@@ -9,6 +9,7 @@ var AuthForm = require('./components/AuthForm.vue');
 var SearchBar = require('./components/SearchBar.vue');
 var ResultList = require('./components/ResultList.vue');
 var NewLink = require('./components/NewLink.vue');
+var NavMenu = require('./components/NavMenu.vue');
 
 ChromeStorage.getAccessToken().then(function (authToken) {
     Vue.http.headers.common['X-Auth-Token'] = authToken;
@@ -25,7 +26,8 @@ ChromeStorage.getAccessToken().then(function (authToken) {
             'search-bar': SearchBar,
             'result-list': ResultList,
             'auth-form': AuthForm,
-            'new-link': NewLink
+            'new-link': NewLink,
+            'nav-menu': NavMenu
         },
         methods: {
             onTermChange: function (term) {
@@ -88,14 +90,10 @@ ChromeStorage.getAccessToken().then(function (authToken) {
             },
             newLink: function () {
                 this.linkForm = true;
+            },
+            onLogout: function () {
+                console.log('LOGGING OUT!');
             }
         }
     });
-});
-
-//Click listener for hamburger menu
-var hamburger = document.querySelector('.hamburger-wrapper');
-hamburger.addEventListener('click', function (e) {
-    e.preventDefault();
-    this.classList.toggle('active');
 });

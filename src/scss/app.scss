@@ -172,6 +172,7 @@ ul {
   display: inline-block;
   min-width: 10%;
   height: 1.67em;
+  z-index: 1000;
 
   .hamburger {
     transition: background .3s ease;
@@ -219,6 +220,29 @@ ul {
       &:after {
         transform: rotate(225deg);
       }
+    }
+  }
+}
+
+.hamburger-nav {
+  transition: all .4s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: $backgroundColor;
+
+  .nav {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+
+    .item {
+      margin: 0.6em 0;
+      font-size: 1.5em;
+      cursor: pointer;
     }
   }
 }
