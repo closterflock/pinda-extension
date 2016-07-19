@@ -32,6 +32,31 @@ ChromeStorage.prototype.set = function (key, value) {
 };
 
 /**
+ * Removes an item from storage.
+ *
+ * @param key
+ * @returns {Promise}
+ */
+ChromeStorage.prototype.remove = function (key) {
+    var self = this;
+    return new Promise(function (resolve) {
+        self._storage.remove(key, resolve);
+    });
+};
+
+/**
+ * Clears out the storage.
+ *
+ * @returns {Promise}
+ */
+ChromeStorage.prototype.clearAll = function () {
+    var self = this;
+    return new Promise(function (resolve) {
+        self._storage.clear(resolve);
+    });
+};
+
+/**
  * Retrieves an item from the storage, or returns a default value.
  *
  * @param key
@@ -71,8 +96,13 @@ ChromeStorage.prototype.setAccessToken = function (value) {
     return this.set(this._accessTokenKey, value);
 };
 
+/**
+ * Clears the access token.
+ *
+ * @returns {Promise}
+ */
 ChromeStorage.prototype.clearAccessToken = function () {
-    return this.set(this._accessTokenKey, '');
+    return this.remove(this._accessTokenKey);
 };
 
 module.exports = new ChromeStorage();
