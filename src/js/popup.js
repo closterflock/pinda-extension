@@ -65,6 +65,7 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                             console.log(e);
                         });
                         self.loggedIn = true;
+                        this.$refs.authForm.resetForm();
                         // console.log(response);
                     }).catch(function (response) {
                         console.log('error here');

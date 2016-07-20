@@ -40,6 +40,11 @@
         methods: {
             submitForm: function (e) {
                 this.onSubmit(this.email, this.password);
+            },
+            resetForm: function () {
+                this.email = undefined;
+                this.password = undefined;
+                this.isRegistration = false;
             }
         }
     }
