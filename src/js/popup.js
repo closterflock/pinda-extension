@@ -1,17 +1,17 @@
 'use strict';
 
 var Vue = require('vue');
-Vue.use(require('vue-resource'));
-
+var VueSettings = require('./vue-settings');
 var ChromeStorage = require('./chrome-storage');
 
 var AuthForm = require('./components/AuthForm.vue');
 var SearchBar = require('./components/SearchBar.vue');
 var ResultList = require('./components/ResultList.vue');
 var NewLink = require('./components/NewLink.vue');
+var NavMenu = require('./components/NavMenu.vue');
 
 ChromeStorage.getAccessToken().then(function (authToken) {
-    Vue.http.headers.common['X-Auth-Token'] = authToken;
+    VueSettings.setAuthTokenHeader(authToken);
     new Vue({
         el: 'body',
         data: function () {
@@ -25,7 +25,8 @@ ChromeStorage.getAccessToken().then(function (authToken) {
             'search-bar': SearchBar,
             'result-list': ResultList,
             'auth-form': AuthForm,
-            'new-link': NewLink
+            'new-link': NewLink,
+            'nav-menu': NavMenu
         },
         methods: {
             onTermChange: function (term) {
@@ -54,7 +55,7 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                     .then(function (response) {
                         console.log(response.data.data);
                         var token = response.data.data.token;
-                        Vue.http.headers.common['X-Auth-Token'] = token;
+                        VueSettings.setAuthTokenHeader(token);
                         ChromeStorage.setAccessToken(token).then(function () {
                             ChromeStorage.getAccessToken().then(function (token) {
                                 console.log('token = ');
@@ -64,6 +65,7 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                             console.log(e);
                         });
                         self.loggedIn = true;
+                        this.$refs.authForm.resetForm();
                         // console.log(response);
                     }).catch(function (response) {
                         console.log('error here');
@@ -88,6 +90,13 @@ ChromeStorage.getAccessToken().then(function (authToken) {
             },
             newLink: function () {
                 this.linkForm = true;
+            },
+            onLogout: function () {
+                this.$http.delete('http://pinda.app/api/v1/logout').then(function () {
+                    VueSettings.clearAuthTokenHeader();
+                });
+                ChromeStorage.clearAccessToken();
+                this.loggedIn = false;
             }
         }
     });
