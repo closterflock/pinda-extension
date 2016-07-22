@@ -13,7 +13,13 @@ function VueSettings() {
  */
 VueSettings.prototype.setCustomDirectives = function () {
     Vue.directive('opaque', function (value) {
-        this.el.style.opacity = (value ? '1' : '0');
+        if (value) {
+            this.el.style.opacity = 1;
+            this.el.style.zIndex = '';
+        } else {
+            this.el.style.opacity = 0;
+            this.el.style.zIndex = -999999999;
+        }
     });
 };
 
