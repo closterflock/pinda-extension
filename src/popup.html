@@ -8,14 +8,13 @@
 <body>
     <auth-form v-ref:auth-form v-show="!loggedIn" :on-submit="attemptLogin"></auth-form>
     <div class="logged-in" v-show="loggedIn">
-        <h2 id="search-header">Search</h2>
         <nav-menu :on-logout="onLogout"></nav-menu>
         <search-bar v-ref:search-bar :on-term-change="onTermChange" v-show="!linkForm"></search-bar>
         <result-list v-ref:result-list :links="links" :on-clicked-tag="onClickedTag"></result-list>
         <button class="new-link" v-on:click.prevent="newLink" v-show="!linkForm">
             +
         </button>
-        <new-link v-show="linkForm"></new-link>
+        <new-link v-show="linkForm" :on-submit="onSubmit"></new-link>
     </div>
     <script src="js/popup.js"></script>
 </body>

@@ -97,6 +97,16 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 });
                 ChromeStorage.clearAccessToken();
                 this.loggedIn = false;
+            },
+            onSubmit: function (component) {
+                this.$http.post('http://pinda.app/api/v1/links/new', {
+                        title: component.title,
+                        description: component.description,
+                        url: component.url
+                    }).then(function (response) {
+                        this.linkForm = false;
+                        console.log(response.data);
+                    });
             }
         }
     });

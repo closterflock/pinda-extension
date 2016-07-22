@@ -33,15 +33,7 @@
         ],
         methods: {
             submitForm: function () {
-                this.$http.post(
-                'http://pinda.app/api/v1/links/new',
-                {
-                    title: this.name,
-                    description: this.description,
-                    url: this.url
-                }).then(function (response) {
-                    console.log(response.data);
-                });
+                this.onSubmit(this);
             }
         }
     }
