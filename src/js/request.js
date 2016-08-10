@@ -108,6 +108,7 @@ Request.prototype.replaceHeaders = function (headers) {
  * @param url
  * @param params
  * @param headers
+ * @return {Promise}
  */
 Request.prototype.request = function (method, url, params, headers) {
     this.checkForDefinedValues(method, url, params, headers);
@@ -115,12 +116,12 @@ Request.prototype.request = function (method, url, params, headers) {
     if (!this.hasRequiredFields()) {
         this.throwRequiredFieldsError();
     }
-    this.makeRequest();
+    return this.makeRequest();
 };
 
 /**
  * Makes a request.
- * 
+ *
  * @return {Promise}
  */
 Request.prototype.makeRequest = function () {
