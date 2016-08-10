@@ -7,8 +7,6 @@ function Request() {
     this.url = undefined;
     this.params = {};
     this.headers = {};
-    this.successCallback = undefined;
-    this.failureCallback = undefined;
 }
 
 /**
@@ -104,35 +102,15 @@ Request.prototype.replaceHeaders = function (headers) {
 };
 
 /**
- * Sets the success callback.
- *
- * @param callback
- */
-Request.prototype.setSuccess = function (callback) {
-    this.successCallback = callback;
-};
-
-/**
- * Sets the failure callback.
- *
- * @param callback
- */
-Request.prototype.setFailure = function (callback) {
-    this.failureCallback = callback;
-};
-
-/**
  * Sets parameters and makes a request. A convenience method to pass all params in a single place.
  *
  * @param method
  * @param url
  * @param params
  * @param headers
- * @param success
- * @param failure
  */
-Request.prototype.request = function (method, url, params, headers, success, failure) {
-    this.checkForDefinedValues(method, url, params, headers, success, failure);
+Request.prototype.request = function (method, url, params, headers) {
+    this.checkForDefinedValues(method, url, params, headers);
 
     if (!this.hasRequiredFields()) {
         this.throwRequiredFieldsError();
@@ -144,19 +122,20 @@ Request.prototype.request = function (method, url, params, headers, success, fai
  * Makes a request.
  */
 Request.prototype.makeRequest = function () {
-    var instance = this;
-    request(this.prepareOptions(), function (error, response, body) {
-        if (error) {
-            if (typeof instance.failureCallback != 'undefined') {
-                instance.failureCallback(error, response, body);
+    return new Promise(function (resolve, reject) {
+        request(this.prepareOptions(), function (error, response, body) {
+            var data = {
+                error: error,
+                response: response,
+                body: body
+            };
+
+            if (error) {
+                return reject(data);
             } else {
-                throw error;
+                return resolve(data);
             }
-        } else {
-            if (typeof instance.successCallback != 'undefined') {
-                instance.successCallback(response, body);
-            }
-        }
+        });
     });
 };
 
@@ -199,10 +178,8 @@ Request.prototype.prepareOptions = function () {
  * @param url
  * @param params
  * @param headers
- * @param success
- * @param failure
  */
-Request.prototype.checkForDefinedValues = function (method, url, params, headers, success, failure) {
+Request.prototype.checkForDefinedValues = function (method, url, params, headers) {
 
     if (this.isDefined(method)) {
         this.setMethod(method);
@@ -218,14 +195,6 @@ Request.prototype.checkForDefinedValues = function (method, url, params, headers
 
     if (this.isDefined(headers)) {
         this.setHeaders(headers);
-    }
-
-    if (this.isDefined(success)) {
-        this.setSuccess(success);
-    }
-
-    if (this.isDefined(failure)) {
-        this.setFailure(failure);
     }
 };
 
