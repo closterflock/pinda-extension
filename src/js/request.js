@@ -120,6 +120,8 @@ Request.prototype.request = function (method, url, params, headers) {
 
 /**
  * Makes a request.
+ * 
+ * @return {Promise}
  */
 Request.prototype.makeRequest = function () {
     return new Promise(function (resolve, reject) {
