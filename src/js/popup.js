@@ -112,7 +112,8 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                 this.$http.post('http://pinda.app/api/v1/links/new', {
                     title: component.title,
                     description: component.description,
-                    url: component.url
+                    url: component.url,
+                    tags: component.activeTags
                 }).then(function (response) {
                     this.linkForm = false;
                     console.log(response.data);

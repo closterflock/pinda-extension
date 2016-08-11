@@ -10,7 +10,7 @@
     <div class="logged-in" v-show="loggedIn">
         <nav-menu :on-logout="onLogout"></nav-menu>
         <search-bar v-ref:search-bar :on-term-change="onTermChange" v-show="!linkForm"></search-bar>
-        <result-list v-ref:result-list :links="links" :on-clicked-tag="onClickedTag"></result-list>
+        <result-list v-ref:result-list :links="links" :on-clicked-tag="onClickedTag" v-show="!linkForm"></result-list>
         <button class="new-link" v-on:click.prevent="newLink" v-show="!linkForm">
             +
         </button>

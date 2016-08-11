@@ -15,7 +15,7 @@
             URL
             <input type="text" name="url" v-model="url" lazy/>
         </label>
-        <tag-list :tags="tags"></tag-list>
+        <tag-list v-ref:tag-list :tags="tags"></tag-list>
         <button type="submit">Submit</button>
     </form>
 </template>
@@ -31,7 +31,8 @@
             return {
                 title: undefined,
                 description: undefined,
-                url: undefined
+                url: undefined,
+                activeTags: []
             }
         },
         props: [
@@ -40,7 +41,7 @@
         ],
         methods: {
             submitForm: function () {
-                console.log(this.tags);
+                this.activeTags = this.$refs.tagList.getActiveTags();
                 this.onSubmit(this);
             }
         }
