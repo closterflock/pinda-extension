@@ -15,12 +15,18 @@
             URL
             <input type="text" name="url" v-model="url" lazy/>
         </label>
+        <tag-list :tags="tags"></tag-list>
         <button type="submit">Submit</button>
     </form>
 </template>
 
 <script>
+    var TagList = require('./TagList.vue');
+
     export default {
+        components: {
+            'tag-list': TagList
+        },
         data: function () {
             return {
                 title: undefined,
@@ -29,10 +35,12 @@
             }
         },
         props: [
-            'onSubmit'
+            'onSubmit',
+            'tags'
         ],
         methods: {
             submitForm: function () {
+                console.log(this.tags);
                 this.onSubmit(this);
             }
         }

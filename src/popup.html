@@ -14,7 +14,7 @@
         <button class="new-link" v-on:click.prevent="newLink" v-show="!linkForm">
             +
         </button>
-        <new-link v-show="linkForm" :on-submit="onSubmit"></new-link>
+        <new-link v-show="linkForm" :on-submit="onSubmit" :tags="tags"></new-link>
     </div>
     <script src="js/popup.js"></script>
 </body>
