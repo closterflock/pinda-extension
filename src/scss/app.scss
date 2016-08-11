@@ -302,24 +302,24 @@ form {
       margin-top: 0;
     }
 
-    .tag-list {
-      display: flex;
-      flex-flow: row wrap;
-      align-items: center;
+  }
+}
 
-      .tag {
-        cursor: pointer;
-        color: white;
-        flex-grow: 1;
-        text-align: center;
-        padding: .25em;
-        margin: .2em;
-        border-radius: .5em;
-        font-weight: bold;
-        background: $accentColor;
-      }
-    }
+.tag-list {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 
+  .tag {
+    cursor: pointer;
+    color: white;
+    flex-grow: 1;
+    text-align: center;
+    padding: .25em;
+    margin: .2em;
+    border-radius: .5em;
+    font-weight: bold;
+    background: $accentColor;
   }
 }
 
