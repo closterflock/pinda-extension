@@ -150,6 +150,16 @@ ul {
   padding: 0;
 }
 
+
+form {
+  width: 85%;
+  margin: 0 auto;
+
+  input, button {
+    box-sizing: border-box;
+  }
+}
+
 /**
 *Objects
  */
@@ -310,15 +320,6 @@ ul {
       }
     }
 
-  }
-}
-
-.auth-form {
-  width: 85%;
-  margin: 0 auto;
-
-  input, button {
-    box-sizing: border-box;
   }
 }
 
