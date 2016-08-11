@@ -1,6 +1,7 @@
 'use strict';
 
 var request = require('request');
+var APIResponse = require('./api-response');
 
 function Request() {
     this.method = undefined;
@@ -125,18 +126,16 @@ Request.prototype.request = function (method, url, params, headers) {
  * @return {Promise}
  */
 Request.prototype.makeRequest = function () {
+    var self = this;
     return new Promise(function (resolve, reject) {
-        request(this.prepareOptions(), function (error, response, body) {
-            var data = {
-                error: error,
-                response: response,
-                body: body
-            };
 
+        request(self.prepareOptions(), function (error, response, body) {
+            var apiResponse = new APIResponse(response, body);
             if (error) {
-                return reject(data);
+                response.setError(error);
+                return reject(apiResponse);
             } else {
-                return resolve(data);
+                return resolve(apiResponse);
             }
         });
     });

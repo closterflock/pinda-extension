@@ -1,6 +1,7 @@
 'use strict';
 
 var Request = require('./request');
+var VueSettings = require('./vue-settings');
 
 function APIRepository() {
     this.baseURL = 'http://pinda.app';
@@ -14,7 +15,7 @@ function APIRepository() {
 APIRepository.prototype.prepareRequest = function () {
     var request = new Request();
     //TODO set auth token via a settings class?
-    request.appendHeader('X-Auth-Token', '12345');
+    request.appendHeader('X-Auth-Token', VueSettings.getAuthTokenHeader());
 
     return request;
 };
@@ -31,3 +32,5 @@ APIRepository.prototype.getTags = function () {
 
     return request.makeRequest();
 };
+
+module.exports = new APIRepository();
