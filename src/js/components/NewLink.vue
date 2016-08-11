@@ -1,5 +1,5 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
-    <form class="auth-form" v-on:submit.prevent="submitForm">
+    <form class="new-link-form" v-on:submit.prevent="submitForm">
         <h2>
             New Link
         </h2>
