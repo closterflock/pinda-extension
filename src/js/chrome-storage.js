@@ -1,4 +1,5 @@
 'use strict';
+// @flow
 
 function ChromeStorage() {
     this._storage = chrome.storage.local;
@@ -11,7 +12,7 @@ function ChromeStorage() {
  * @param data
  * @returns {Promise}
  */
-ChromeStorage.prototype.store = function (data) {
+ChromeStorage.prototype.store = function (data: Object): Promise<*> {
     var self = this;
     return new Promise(function (resolve) {
         self._storage.set(data, resolve);
@@ -25,7 +26,7 @@ ChromeStorage.prototype.store = function (data) {
  * @param value
  * @returns {Promise}
  */
-ChromeStorage.prototype.set = function (key, value) {
+ChromeStorage.prototype.set = function (key: string, value: any): Promise<*> {
     var data = {};
     data[key] = value;
     return this.store(data);
@@ -37,7 +38,7 @@ ChromeStorage.prototype.set = function (key, value) {
  * @param key
  * @returns {Promise}
  */
-ChromeStorage.prototype.remove = function (key) {
+ChromeStorage.prototype.remove = function (key: string): Promise<*> {
     var self = this;
     return new Promise(function (resolve) {
         self._storage.remove(key, resolve);
@@ -49,7 +50,7 @@ ChromeStorage.prototype.remove = function (key) {
  *
  * @returns {Promise}
  */
-ChromeStorage.prototype.clearAll = function () {
+ChromeStorage.prototype.clearAll = function (): Promise<*> {
     var self = this;
     return new Promise(function (resolve) {
         self._storage.clear(resolve);
@@ -63,7 +64,7 @@ ChromeStorage.prototype.clearAll = function () {
  * @param defaultValue
  * @returns {Promise}
  */
-ChromeStorage.prototype.get = function (key, defaultValue) {
+ChromeStorage.prototype.get = function (key: string, defaultValue: any): Promise<*> {
     var self = this;
     return new Promise(function (resolve) {
         self._storage.get(key, function (values) {
@@ -82,7 +83,7 @@ ChromeStorage.prototype.get = function (key, defaultValue) {
  *
  * @returns {Promise}
  */
-ChromeStorage.prototype.getAccessToken = function () {
+ChromeStorage.prototype.getAccessToken = function (): Promise<*> {
     return this.get(this._accessTokenKey);
 };
 
@@ -92,7 +93,7 @@ ChromeStorage.prototype.getAccessToken = function () {
  * @param value
  * @returns {Promise}
  */
-ChromeStorage.prototype.setAccessToken = function (value) {
+ChromeStorage.prototype.setAccessToken = function (value: any): Promise<*> {
     return this.set(this._accessTokenKey, value);
 };
 
@@ -101,7 +102,7 @@ ChromeStorage.prototype.setAccessToken = function (value) {
  *
  * @returns {Promise}
  */
-ChromeStorage.prototype.clearAccessToken = function () {
+ChromeStorage.prototype.clearAccessToken = function (): Promise<*> {
     return this.remove(this._accessTokenKey);
 };
 
