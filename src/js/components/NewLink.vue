@@ -1,5 +1,5 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
-    <form class="auth-form" v-on:submit.prevent="submitForm">
+    <form class="new-link-form" v-on:submit.prevent="submitForm">
         <h2>
             New Link
         </h2>
@@ -15,24 +15,33 @@
             URL
             <input type="text" name="url" v-model="url" lazy/>
         </label>
+        <tag-list v-ref:tag-list :tags="tags"></tag-list>
         <button type="submit">Submit</button>
     </form>
 </template>
 
 <script>
+    var TagList = require('./TagList.vue');
+
     export default {
+        components: {
+            'tag-list': TagList
+        },
         data: function () {
             return {
                 title: undefined,
                 description: undefined,
-                url: undefined
+                url: undefined,
+                activeTags: []
             }
         },
         props: [
-            'onSubmit'
+            'onSubmit',
+            'tags'
         ],
         methods: {
             submitForm: function () {
+                this.activeTags = this.$refs.tagList.getActiveTags();
                 this.onSubmit(this);
             }
         }

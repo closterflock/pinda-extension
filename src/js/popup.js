@@ -2,6 +2,7 @@
 
 var Vue = require('vue');
 var VueSettings = require('./vue-settings');
+var APIRepository = require('./api-repository');
 var ChromeStorage = require('./chrome-storage');
 
 var AuthForm = require('./components/AuthForm.vue');
@@ -10,16 +11,25 @@ var ResultList = require('./components/ResultList.vue');
 var NewLink = require('./components/NewLink.vue');
 var NavMenu = require('./components/NavMenu.vue');
 
+
 ChromeStorage.getAccessToken().then(function (authToken) {
     VueSettings.setAuthTokenHeader(authToken);
+    return APIRepository.getTags().then(function (apiResponse) {
+        console.log(apiResponse);
+        var tags = apiResponse.getBody().data.tags;
+        console.log(tags);
+        return {
+            loggedIn: typeof authToken !== 'undefined',
+            links: [],
+            linkForm: false,
+            tags: tags
+        };
+    });
+}).then(function (vueData) {
     new Vue({
         el: 'body',
         data: function () {
-            return {
-                loggedIn: typeof authToken !== 'undefined',
-                links: [],
-                linkForm: false
-            };
+            return vueData
         },
         components: {
             'search-bar': SearchBar,
@@ -68,9 +78,9 @@ ChromeStorage.getAccessToken().then(function (authToken) {
                         this.$refs.authForm.resetForm();
                         // console.log(response);
                     }).catch(function (response) {
-                        console.log('error here');
-                        console.log(response.data);
-                    });
+                    console.log('error here');
+                    console.log(response.data);
+                });
 
             },
             prepareTagSearch: function (tag) {
@@ -100,13 +110,14 @@ ChromeStorage.getAccessToken().then(function (authToken) {
             },
             onSubmit: function (component) {
                 this.$http.post('http://pinda.app/api/v1/links/new', {
-                        title: component.title,
-                        description: component.description,
-                        url: component.url
-                    }).then(function (response) {
-                        this.linkForm = false;
-                        console.log(response.data);
-                    });
+                    title: component.title,
+                    description: component.description,
+                    url: component.url,
+                    tags: component.activeTags
+                }).then(function (response) {
+                    this.linkForm = false;
+                    console.log(response.data);
+                });
             }
         }
     });

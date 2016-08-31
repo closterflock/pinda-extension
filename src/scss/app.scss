@@ -150,6 +150,16 @@ ul {
   padding: 0;
 }
 
+
+form {
+  width: 85%;
+  margin: 0 auto;
+
+  input, button {
+    box-sizing: border-box;
+  }
+}
+
 /**
 *Objects
  */
@@ -292,33 +302,24 @@ ul {
       margin-top: 0;
     }
 
-    .tag-list {
-      display: flex;
-      flex-flow: row wrap;
-      align-items: center;
-
-      .tag {
-        cursor: pointer;
-        color: white;
-        flex-grow: 1;
-        text-align: center;
-        padding: .25em;
-        margin: .2em;
-        border-radius: .5em;
-        font-weight: bold;
-        background: $accentColor;
-      }
-    }
-
   }
 }
 
-.auth-form {
-  width: 85%;
-  margin: 0 auto;
+.tag-list {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 
-  input, button {
-    box-sizing: border-box;
+  .tag {
+    cursor: pointer;
+    color: white;
+    flex-grow: 1;
+    text-align: center;
+    padding: .25em;
+    margin: .2em;
+    border-radius: .5em;
+    font-weight: bold;
+    background: $accentColor;
   }
 }
 
