@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/closterflock/pinda-extension#readme",
   "dependencies": {
+    "flow-bin": "^0.31.1",
     "gulp-autoprefixer": "^3.1.0",
     "request": "^2.74.0",
     "unflowify": "^1.0.0",
