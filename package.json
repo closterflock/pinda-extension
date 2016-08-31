@@ -20,6 +20,7 @@
   "dependencies": {
     "gulp-autoprefixer": "^3.1.0",
     "request": "^2.74.0",
+    "unflowify": "^1.0.0",
     "vue": "^1.0.21-csp",
     "vue-resource": "^0.7.0"
   },

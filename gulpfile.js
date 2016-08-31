@@ -16,6 +16,7 @@ var plumber = require('gulp-plumber');
 var source = require('vinyl-source-stream');
 var vueify = require('vueify');
 var zip = require('gulp-zip');
+var unflowify = require('unflowify');
 
 var paths = {
     src: {
@@ -68,6 +69,7 @@ gulp.task('bundle', function (done) {
         var tasks = files.map(function (entry) {
             announce(`Bundling ${entry}...`);
             return browserify({ entries: entry })
+                .transform(unflowify)
                 .transform(vueify)
                 .transform(babelify)
                 .bundle()
