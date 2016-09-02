@@ -1,6 +1,9 @@
 'use strict';
 // @flow
 
+var request = require('request');
+var APIResponse = require('./api-response');
+
 type Options = {
     url: string;
     method: string;
@@ -8,9 +11,6 @@ type Options = {
     json?: Object;
     form?: Object;
 }
-
-var request = require('request');
-var APIResponse = require('./api-response');
 
 function Request() {
     this.method = undefined;

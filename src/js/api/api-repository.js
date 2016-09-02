@@ -2,7 +2,7 @@
 // @flow
 
 var Request = require('./request');
-var VueSettings = require('./vue-settings');
+var VueSettings = require('./../config/vue-settings');
 var APIResponse = require('./api-response');
 
 function APIRepository() {
