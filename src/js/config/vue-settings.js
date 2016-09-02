@@ -1,4 +1,5 @@
 'use strict';
+// @flow
 
 var Vue = require('vue');
 
@@ -11,7 +12,7 @@ function VueSettings() {
 /**
  * Sets the custom directives on Vue.
  */
-VueSettings.prototype.setCustomDirectives = function () {
+VueSettings.prototype.setCustomDirectives = function (): void {
     Vue.directive('opaque', function (value) {
         if (value) {
             this.el.style.opacity = 1;
@@ -26,7 +27,7 @@ VueSettings.prototype.setCustomDirectives = function () {
 /**
  * Clears our auth header.
  */
-VueSettings.prototype.clearAuthTokenHeader = function () {
+VueSettings.prototype.clearAuthTokenHeader = function (): void {
     Vue.http.headers.common[this._authHeaderKey] = undefined;
 };
 
@@ -35,7 +36,7 @@ VueSettings.prototype.clearAuthTokenHeader = function () {
  *
  * @returns {string}
  */
-VueSettings.prototype.getAuthTokenHeader = function () {
+VueSettings.prototype.getAuthTokenHeader = function (): string {
     return Vue.http.headers.common[this._authHeaderKey];
 };
 
@@ -44,7 +45,7 @@ VueSettings.prototype.getAuthTokenHeader = function () {
  *
  * @param authToken
  */
-VueSettings.prototype.setAuthTokenHeader = function (authToken) {
+VueSettings.prototype.setAuthTokenHeader = function (authToken: string): void {
     Vue.http.headers.common[this._authHeaderKey] = authToken;
 };
 

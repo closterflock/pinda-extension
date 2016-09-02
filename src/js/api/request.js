@@ -1,7 +1,16 @@
 'use strict';
+// @flow
 
 var request = require('request');
 var APIResponse = require('./api-response');
+
+type Options = {
+    url: string;
+    method: string;
+    headers: Object;
+    json?: Object;
+    form?: Object;
+}
 
 function Request() {
     this.method = undefined;
@@ -16,7 +25,7 @@ function Request() {
  * @param value
  * @returns {boolean}
  */
-Request.prototype.isDefined = function (value) {
+Request.prototype.isDefined = function (value: any): boolean {
     return (typeof value != 'undefined');
 };
 
@@ -25,7 +34,7 @@ Request.prototype.isDefined = function (value) {
  *
  * @param method
  */
-Request.prototype.setMethod = function (method) {
+Request.prototype.setMethod = function (method: string): void {
     this.method = method;
 };
 
@@ -34,7 +43,7 @@ Request.prototype.setMethod = function (method) {
  *
  * @param url
  */
-Request.prototype.setUrl = function (url) {
+Request.prototype.setUrl = function (url: string): void {
     this.url = url;
 };
 
@@ -44,7 +53,7 @@ Request.prototype.setUrl = function (url) {
  * @param key
  * @param value
  */
-Request.prototype.appendParam = function (key, value) {
+Request.prototype.appendParam = function (key: string, value: string): void {
     this.params[key] = value;
 };
 
@@ -53,7 +62,7 @@ Request.prototype.appendParam = function (key, value) {
  *
  * @param params
  */
-Request.prototype.setParams = function (params) {
+Request.prototype.setParams = function (params: Object): void {
     for (var key in params) {
         if (params.hasOwnProperty(key)) {
             this.appendParam(key, params[key]);
@@ -66,7 +75,7 @@ Request.prototype.setParams = function (params) {
  *
  * @param params
  */
-Request.prototype.replaceParams = function (params) {
+Request.prototype.replaceParams = function (params: Object): void {
     this.params = params;
 };
 
@@ -75,7 +84,7 @@ Request.prototype.replaceParams = function (params) {
  *
  * @param headers
  */
-Request.prototype.setHeaders = function (headers) {
+Request.prototype.setHeaders = function (headers: Object): void {
     for (var key in headers) {
         if (headers.hasOwnProperty(key)) {
             this.appendHeader(key, headers[key]);
@@ -89,7 +98,7 @@ Request.prototype.setHeaders = function (headers) {
  * @param key
  * @param value
  */
-Request.prototype.appendHeader = function (key, value) {
+Request.prototype.appendHeader = function (key: string, value: string): void {
     this.headers[key] = value;
 };
 
@@ -98,7 +107,7 @@ Request.prototype.appendHeader = function (key, value) {
  *
  * @param headers
  */
-Request.prototype.replaceHeaders = function (headers) {
+Request.prototype.replaceHeaders = function (headers: Object): void {
     this.headers = headers;
 };
 
@@ -111,7 +120,7 @@ Request.prototype.replaceHeaders = function (headers) {
  * @param headers
  * @return {Promise}
  */
-Request.prototype.request = function (method, url, params, headers) {
+Request.prototype.request = function (method: string, url: string, params: Object, headers: Object): Promise<APIResponse> {
     this.checkForDefinedValues(method, url, params, headers);
 
     if (!this.hasRequiredFields()) {
@@ -125,7 +134,7 @@ Request.prototype.request = function (method, url, params, headers) {
  *
  * @return {Promise}
  */
-Request.prototype.makeRequest = function () {
+Request.prototype.makeRequest = function (): Promise<APIResponse> {
     var self = this;
     return new Promise(function (resolve, reject) {
 
@@ -144,9 +153,9 @@ Request.prototype.makeRequest = function () {
 /**
  * Prepares the option object to pass to the request library.
  */
-Request.prototype.prepareOptions = function () {
+Request.prototype.prepareOptions = function (): Options {
 
-    var options = {
+    var options: Options = {
         url: this.url,
         method: this.method,
         headers: this.headers
@@ -181,7 +190,7 @@ Request.prototype.prepareOptions = function () {
  * @param params
  * @param headers
  */
-Request.prototype.checkForDefinedValues = function (method, url, params, headers) {
+Request.prototype.checkForDefinedValues = function (method: string, url: string, params: Object, headers: Object): void {
 
     if (this.isDefined(method)) {
         this.setMethod(method);
@@ -205,14 +214,14 @@ Request.prototype.checkForDefinedValues = function (method, url, params, headers
  *
  * @returns {boolean}
  */
-Request.prototype.hasRequiredFields = function () {
+Request.prototype.hasRequiredFields = function (): boolean {
     return (this.method != undefined && this.url != undefined);
 };
 
 /**
  * Throws an error if fields aren't set.
  */
-Request.prototype.throwRequiredFieldsError = function () {
+Request.prototype.throwRequiredFieldsError = function (): void {
     throw new Error('Please fill all required fields before attempting a request again.');
 };
 

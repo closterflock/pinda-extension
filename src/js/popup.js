@@ -1,16 +1,15 @@
 'use strict';
 
 var Vue = require('vue');
-var VueSettings = require('./vue-settings');
-var APIRepository = require('./api-repository');
-var ChromeStorage = require('./chrome-storage');
+var VueSettings = require('./config/vue-settings');
+var APIRepository = require('./api/api-repository');
+var ChromeStorage = require('./storage/chrome-storage');
 
 var AuthForm = require('./components/AuthForm.vue');
 var SearchBar = require('./components/SearchBar.vue');
 var ResultList = require('./components/ResultList.vue');
 var NewLink = require('./components/NewLink.vue');
 var NavMenu = require('./components/NavMenu.vue');
-
 
 ChromeStorage.getAccessToken().then(function (authToken) {
     VueSettings.setAuthTokenHeader(authToken);
@@ -31,13 +30,13 @@ ChromeStorage.getAccessToken().then(function (authToken) {
         data: function () {
             return vueData
         },
-        components: {
-            'search-bar': SearchBar,
-            'result-list': ResultList,
-            'auth-form': AuthForm,
-            'new-link': NewLink,
-            'nav-menu': NavMenu
-        },
+        // components: {
+        //     'search-bar': SearchBar,
+        //     'result-list': ResultList,
+        //     'auth-form': AuthForm,
+        //     'new-link': NewLink,
+        //     'nav-menu': NavMenu
+        // },
         methods: {
             onTermChange: function (term) {
                 this.links = this.searchForTerm(term);
