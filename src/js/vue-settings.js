@@ -45,7 +45,7 @@ VueSettings.prototype.getAuthTokenHeader = function (): string {
  *
  * @param authToken
  */
-VueSettings.prototype.setAuthTokenHeader = function (authToken): void {
+VueSettings.prototype.setAuthTokenHeader = function (authToken: string): void {
     Vue.http.headers.common[this._authHeaderKey] = authToken;
 };
 
