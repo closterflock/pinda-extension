@@ -5,11 +5,11 @@ var VueSettings = require('./config/vue-settings');
 var APIRepository = require('./api/api-repository');
 var ChromeStorage = require('./storage/chrome-storage');
 
-var AuthForm = require('./components/AuthForm.vue');
-var SearchBar = require('./components/SearchBar.vue');
-var ResultList = require('./components/ResultList.vue');
-var NewLink = require('./components/NewLink.vue');
-var NavMenu = require('./components/NavMenu.vue');
+// var AuthForm = require('./components/AuthForm.vue');
+// var SearchBar = require('./components/SearchBar.vue');
+// var ResultList = require('./components/ResultList.vue');
+// var NewLink = require('./components/NewLink.vue');
+// var NavMenu = require('./components/NavMenu.vue');
 
 ChromeStorage.getAccessToken().then(function (authToken) {
     VueSettings.setAuthTokenHeader(authToken);
