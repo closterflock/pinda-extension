@@ -50,7 +50,7 @@ module.exports = React.createClass({
                     &lt;
                 </h1>
                 <h1 className="header-text">
-                    Header
+                    Pinda
                 </h1>
                 <div className={'nav-button ' + (this.navIsActive() ? 'active' : '')} onClick={this.toggleNav}>
                     <div className='icon'></div>
