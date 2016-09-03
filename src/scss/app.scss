@@ -174,18 +174,18 @@ form {
 *Components
  */
 
-.hamburger-wrapper {
+.nav-button {
   cursor: pointer;
-  margin-top: 1.3em;
-  margin-right: .75em;
+  margin-top: .9em;
   float: right;
   position: relative;
   display: inline-block;
-  min-width: 10%;
+  width: 10%;
   height: 1.67em;
   z-index: 1000;
+  user-select: none;
 
-  .hamburger {
+  .icon {
     transition: background .3s ease;
     position: absolute;
     top: 50%;
@@ -216,7 +216,7 @@ form {
 
 
   &.active {
-    .hamburger {
+    .icon {
       background: transparent;
 
       &:before, &:after {
@@ -328,6 +328,34 @@ form {
   width: 25%;
   font-size: 2em;
   padding: .25em;
+}
+
+/**
+ * New components - React
+ */
+.header {
+
+  padding-bottom: .5em;
+  border-bottom: 1px solid #555;
+
+  .back-button {
+    cursor: pointer;
+    user-select: none;
+    font-size:2.5em;
+    margin: 0;
+    width: 10%;
+    display: inline-block;
+    visibility: hidden;
+    &.active {
+      visibility: visible;
+    }
+  }
+  .header-text {
+    margin: 0;
+    width: 80%;
+    display: inline-block;
+    text-align: center;
+  }
 }
 
 /**

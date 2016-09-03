@@ -1,6 +1,8 @@
 'use strict';
 // @flow
 
+var str: Number = 'stuff';
+
 var React = require('react');
 
 module.exports = React.createClass({
@@ -19,8 +21,8 @@ module.exports = React.createClass({
     },
     render: function () {
         return (
-            <div className={'hamburger-wrapper ' + (this.state.active ? 'active' : '')} onClick={this.toggleNav}>
-                <div className='hamburger'></div>
+            <div className={'nav-button ' + (this.state.active ? 'active' : '')} onClick={this.toggleNav}>
+                <div className='icon'></div>
             </div>
         );
     }
