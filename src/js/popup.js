@@ -10,7 +10,7 @@ var ReactDom = require('react-dom');
 
 var Application = require('./react/Application.jsx');
 
-ReactDom.render(React.createElement(Application), document.querySelector('#application'));
+ReactDom.render(React.createElement(Application), document.querySelector('.popup'));
 
 // ChromeStorage.getAccessToken().then(function (authToken) {
 //     VueSettings.setAuthTokenHeader(authToken);
