@@ -2,36 +2,46 @@
 // @flow
 
 var React = require('react');
-var NavButton = require('./NavButton.jsx');
 
 module.exports = React.createClass({
     getInitialState: function () {
         return {
-            backStateActive: false
+            backStateActive: false,
+            navActive: false
         }
     },
-    backStateIsActive: function () {
-        return this.state.backStateActive;
+    backButtonShown: function () {
+        return this.state.backButtonShown;
     },
-    toggleState: function (newState: boolean) {
+    toggleBackButtonShown: function (newState: boolean) {
         if (typeof newState !== 'boolean') {
-            newState = !this.backStateIsActive();
+            newState = !this.backButtonShown();
         }
 
         this.setState({
             backStateActive: newState
         });
     },
+    navIsActive: function () {
+        return this.state.navActive;
+    },
+    toggleNav: function () {
+        this.setState({
+            navActive: !this.navIsActive()
+        });
+    },
     render: function () {
         return (
             <div className='header'>
-                <h1 className={'back-button ' + (this.backStateIsActive() ? 'active' : '')}>
+                <h1 className={'back-button ' + (this.backButtonShown() ? 'active' : '')}>
                     &lt;
                 </h1>
                 <h1 className="header-text">
                     Header
                 </h1>
-                <NavButton/>
+                <div className={'nav-button ' + (this.navIsActive() ? 'active' : '')} onClick={this.toggleNav}>
+                    <div className='icon'></div>
+                </div>
             </div>
         );
     }
