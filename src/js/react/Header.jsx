@@ -10,7 +10,7 @@ module.exports = React.createClass({
     },
     getInitialState: function () {
         return {
-            backStateActive: false,
+            backButtonShown: false,
             navActive: false
         }
     },
