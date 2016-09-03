@@ -225,11 +225,11 @@ form {
       }
 
       &:before {
-        transform: rotate(-225deg);
+        transform: rotate(-135deg);
       }
 
       &:after {
-        transform: rotate(225deg);
+        transform: rotate(135deg);
       }
     }
   }
