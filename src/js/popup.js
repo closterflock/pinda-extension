@@ -5,10 +5,9 @@
 // var APIRepository = require('./api/api-repository');
 // var ChromeStorage = require('./storage/chrome-storage');
 
-var React = require('react');
-var ReactDom = require('react-dom');
-
-var Application = require('./react/Application.jsx');
+import React from 'react';
+import ReactDom from 'react-dom';
+import Application from './react/Application.jsx';
 
 ReactDom.render(React.createElement(Application), document.querySelector('.popup'));
 
