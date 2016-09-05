@@ -3,18 +3,22 @@
 
 import React from 'react';
 
-type State = {
-    active: boolean
-};
-
 export default class Menu extends React.Component {
 
-    state: State;
+    state: {
+        active: boolean
+    };
 
-    static getInitialState(): State {
-        return {
+    constructor(props: Object) {
+        super(props);
+        this.state = {
             active: false
         };
+
+        const self: any = this;
+
+        self.isActive = self.isActive.bind(self);
+        self.setActive = self.setActive.bind(self);
     }
 
     isActive(): boolean {
@@ -26,7 +30,7 @@ export default class Menu extends React.Component {
             newState = !this.isActive();
         }
 
-        var state: State = this.state;
+        var state: Object = this.state;
         state.active = newState;
         this.setState(state);
     }

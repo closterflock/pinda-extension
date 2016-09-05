@@ -7,6 +7,15 @@ import Menu from './Menu.jsx';
 export default class Content extends React.Component {
     menuComponent: Menu;
 
+    constructor(props: Object) {
+        super(props);
+
+        const self: any = this;
+
+        self.menuMounted = self.menuMounted.bind(self);
+        self.setMenu = self.setMenu.bind(self);
+    }
+
     menuMounted(menu: Menu): void {
         this.menuComponent = menu;
     }

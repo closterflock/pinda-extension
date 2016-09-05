@@ -3,26 +3,33 @@
 
 import React from 'react';
 
-type State = {
-    backButtonShown: boolean;
-    navActive: any
-};
-
 export default class Header extends React.Component {
-    propTypes: {
+    static propTypes = {
         onBackButton: React.PropTypes.func.isRequired,
         onNavButton: React.PropTypes.func.isRequired
     };
-    state: State;
 
-    static getInitialState(): State {
-        return {
+    state: {
+        backButtonShown: boolean;
+        navActive: boolean
+    };
+
+    constructor(props: Object) {
+        super(props);
+        this.state = {
             backButtonShown: false,
             navActive: false
         };
+
+        const self: any = this;
+
+        self.backButtonShown = self.backButtonShown.bind(self);
+        self.toggleBackButtonShown = self.toggleBackButtonShown.bind(self);
+        self.navIsActive = self.navIsActive.bind(self);
+        self.toggleNav = self.toggleNav.bind(self);
     }
 
-    getCurrentState(): State {
+    getCurrentState(): Object {
         return this.state;
     }
 
@@ -34,7 +41,7 @@ export default class Header extends React.Component {
         if (typeof newState !== 'boolean') {
             newState = !this.backButtonShown();
         }
-        var state: State = this.getCurrentState();
+        var state: Object = this.getCurrentState();
 
         this.props.onBackButton(newState);
         state.backButtonShown = newState;
@@ -49,7 +56,7 @@ export default class Header extends React.Component {
         if (typeof newState !== 'boolean') {
             newState = !this.navIsActive();
         }
-        var state: State = this.getCurrentState();
+        var state: Object = this.getCurrentState();
 
         this.props.onNavButton(newState);
         state.navActive = newState;
