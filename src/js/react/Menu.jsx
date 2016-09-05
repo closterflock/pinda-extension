@@ -1,27 +1,37 @@
 'use strict';
 // @flow
 
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
-    getInitialState: function () {
+type State = {
+    active: boolean
+};
+
+export default class Menu extends React.Component {
+
+    state: State;
+
+    static getInitialState(): State {
         return {
             active: false
         };
-    },
-    isActive: function () {
+    }
+
+    isActive(): boolean {
         return this.state.active;
-    },
-    setActive: function (newState: boolean) {
+    }
+
+    setActive(newState: boolean): void {
         if (typeof newState !== 'boolean') {
             newState = !this.isActive();
         }
 
-        var state: Object = this.state;
+        var state: State = this.state;
         state.active = newState;
         this.setState(state);
-    },
-    render: function () {
+    }
+
+    render() {
         return (
             <div className={'menu' + (this.isActive() ? ' active' : '')}>
                 <h1>Menu</h1>
@@ -31,4 +41,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+}

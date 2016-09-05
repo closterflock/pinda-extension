@@ -1,17 +1,21 @@
 'use strict';
 // @flow
 
-var React = require('react');
-var Menu = require('./Menu.jsx');
+import React from 'react';
+import Menu from './Menu.jsx';
 
-module.exports = React.createClass({
-    menuMounted: function (menu) {
+export default class Content extends React.Component {
+    menuComponent: Menu;
+
+    menuMounted(menu: Menu): void {
         this.menuComponent = menu;
-    },
-    setMenu: function (state: boolean) {
+    }
+
+    setMenu(state: boolean): void {
         this.menuComponent.setActive(state);
-    },
-    render: function () {
+    }
+
+    render() {
         return (
             <section className='content'>
                 <h1>
@@ -21,4 +25,4 @@ module.exports = React.createClass({
             </section>
         );
     }
-});
+}

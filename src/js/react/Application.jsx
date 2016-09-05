@@ -1,24 +1,29 @@
 'use strict';
 // @flow
 
-var React = require('react');
-var Header = require('./Header.jsx');
-var Content = require('./Content.jsx');
+import React from 'react';
+import Header from './Header.jsx';
+import Content from './Content.jsx';
 
-module.exports = React.createClass({
-    onBackButton: function (active: boolean) {
+export default class Application extends React.Component {
+    contentComponent: Content;
 
-    },
-    onNavButton: function (active: boolean) {
+    onBackButton(active: boolean): void {
+
+    }
+
+    onNavButton(active: boolean): void {
         console.log(this.contentComponent);
         this.contentComponent.setMenu(active);
-    },
-    contentMounted: function (content) {
+    }
+
+    contentMounted(content: Content): void {
         console.log(content);
         this.contentComponent = content;
         console.log(this.contentComponent);
-    },
-    render: function () {
+    }
+
+    render() {
         return (
             <div className='app'>
                 <Header onBackButton={this.onBackButton} onNavButton={this.onNavButton}/>
@@ -26,4 +31,4 @@ module.exports = React.createClass({
             </div>
         );
     }
-});
+}
