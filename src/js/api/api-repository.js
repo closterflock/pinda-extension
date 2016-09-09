@@ -54,7 +54,14 @@ class APIRepository {
         return request.makeRequest();
     };
 
-    login(email: string, password: string): Promise<*> {
+    /**
+     * Attempts login.
+     *
+     * @param email
+     * @param password
+     * @returns {Promise.<APIResponse>}
+     */
+    login(email: string, password: string): Promise<APIResponse> {
         let request: Request = new Request();
 
         request.setMethod('POST');
@@ -67,7 +74,15 @@ class APIRepository {
         return request.makeRequest();
     }
 
-    register(name: string, email: string, password: string): Promise<*> {
+    /**
+     * Attempts a registration
+     *
+     * @param name
+     * @param email
+     * @param password
+     * @returns {Promise.<APIResponse>}
+     */
+    register(name: string, email: string, password: string): Promise<APIResponse> {
         let request: Request = new Request();
 
         request.setMethod('POST');
