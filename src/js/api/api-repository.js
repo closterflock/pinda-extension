@@ -13,7 +13,7 @@ class APIRepository {
     }
 
     static getBaseUrl(): string {
-        return 'http://pinda.app';
+        return 'http://pinda.jamesspencemilwaukee.com';
     }
 
     /**
@@ -22,7 +22,7 @@ class APIRepository {
      * @return {Request}
      */
     prepareRequest(): Request {
-        var request: Request = new Request();
+        let request: Request = new Request();
         request.appendHeader('X-Auth-Token', this.token);
         return request;
     };
@@ -31,7 +31,7 @@ class APIRepository {
      * Refreshes the auth token from chrome storage.
      */
     refreshAuthToken(): void {
-        var self = this;
+        let self = this;
         ChromeStorage.getAccessToken().then(function (token) {
             self.setAuthToken(token);
         });
@@ -47,12 +47,39 @@ class APIRepository {
      * @return {Promise<Class<APIResponse>>}
      */
     getTags(): Promise<APIResponse> {
-        var request: Request = this.prepareRequest();
+        let request: Request = this.prepareRequest();
         request.setMethod('GET');
         request.setUrl(this.constructor.getBaseUrl() + '/api/v1/tags');
 
         return request.makeRequest();
     };
+
+    login(email: string, password: string): Promise<*> {
+        let request: Request = new Request();
+
+        request.setMethod('POST');
+        request.setUrl(this.constructor.getBaseUrl() + '/api/v1/login');
+        request.setParams({
+            email: email,
+            password: password
+        });
+
+        return request.makeRequest();
+    }
+
+    register(name: string, email: string, password: string): Promise<*> {
+        let request: Request = new Request();
+
+        request.setMethod('POST');
+        request.setUrl(this.constructor.getBaseUrl() + '/api/v1/register');
+        request.setParams({
+            name: name,
+            email: email,
+            password: password
+        });
+
+        return request.makeRequest();
+    }
 }
 
 export default new APIRepository();
