@@ -82,7 +82,7 @@ class ChromeStorage {
      *
      * @returns {Promise}
      */
-    getAccessToken(): Promise<*> {
+    getAccessToken(): Promise<string> {
         return this.get(this._accessTokenKey);
     };
 

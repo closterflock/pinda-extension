@@ -2,10 +2,16 @@
 // @flow
 
 import Request from './request';
-import VueSettings from './../config/vue-settings';
+import ChromeStorage from './../storage/chrome-storage';
 import APIResponse from './api-response';
 
 class APIRepository {
+    token: string;
+
+    constructor() {
+        this.refreshAuthToken();
+    }
+
     static getBaseUrl(): string {
         return 'http://pinda.app';
     }
@@ -15,13 +21,25 @@ class APIRepository {
      *
      * @return {Request}
      */
-    static prepareRequest(): Request {
+    prepareRequest(): Request {
         var request: Request = new Request();
-        //TODO set auth token via a settings class, other than vue-settings
-        request.appendHeader('X-Auth-Token', VueSettings.getAuthTokenHeader());
-
+        request.appendHeader('X-Auth-Token', this.token);
         return request;
     };
+
+    /**
+     * Refreshes the auth token from chrome storage.
+     */
+    refreshAuthToken(): void {
+        var self = this;
+        ChromeStorage.getAccessToken().then(function (token) {
+            self.setAuthToken(token);
+        });
+    }
+
+    setAuthToken(token: string): void {
+        this.token = token;
+    }
 
     /**
      * Retrieves tags from the API.
@@ -29,7 +47,7 @@ class APIRepository {
      * @return {Promise<Class<APIResponse>>}
      */
     getTags(): Promise<APIResponse> {
-        var request: Request = APIRepository.prepareRequest();
+        var request: Request = this.prepareRequest();
         request.setMethod('GET');
         request.setUrl(this.constructor.getBaseUrl() + '/api/v1/tags');
 
