@@ -11,14 +11,16 @@ export default class Header extends React.Component {
 
     state: {
         backButtonShown: boolean;
-        navActive: boolean
+        navActive: boolean;
+        navButtonHidden: boolean;
     };
 
     constructor(props: Object) {
         super(props);
         this.state = {
             backButtonShown: false,
-            navActive: false
+            navActive: false,
+            navButtonHidden: false
         };
 
         const self: any = this;
@@ -63,7 +65,24 @@ export default class Header extends React.Component {
         this.setState(state);
     }
 
+    toggleNavHidden(newState: boolean): void {
+        if (typeof newState !== 'boolean') {
+            newState = !this.navButtonHidden();
+        }
+        let state: Object = this.getCurrentState();
+
+        state.navButtonHidden = newState;
+        this.setState(state);
+    }
+
+    navButtonHidden(): boolean {
+        return this.getCurrentState().navButtonHidden;
+    }
+
     render() {
+        let navClasses: string = 'nav-button' +
+            (this.navIsActive() ? ' active' : '') +
+            (this.navButtonHidden() ? ' hidden' : '');
         return (
             <div className='header'>
                 <h1 className={'back-button ' + (this.backButtonShown() ? 'active' : '')}>
@@ -72,7 +91,7 @@ export default class Header extends React.Component {
                 <h1 className="header-text">
                     Pinda
                 </h1>
-                <div className={'nav-button ' + (this.navIsActive() ? 'active' : '')} onClick={this.toggleNav}>
+                <div className={navClasses} onClick={this.toggleNav}>
                     <div className='icon'></div>
                 </div>
             </div>
