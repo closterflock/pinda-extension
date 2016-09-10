@@ -5,6 +5,10 @@ class ChromeStorage {
     _storage: any;
     _accessTokenKey: 'accessToken';
 
+    constructor() {
+        this._storage = chrome.storage.local;
+    }
+
     /**
      * Stores an object into the storage.
      *
