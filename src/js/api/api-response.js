@@ -8,10 +8,10 @@ export default class APIResponse {
     _body: Object;
     _responseObject: Object;
 
-    constructor(response: Object, body: string) {
+    constructor(response: Object, body: Object) {
         this.setResponseObject(response);
-        this.setRawResponse(body);
-        this.setBody(JSON.parse(body));
+        this.setRawResponse(JSON.stringify(body));
+        this.setBody(body);
     }
 
     /**
