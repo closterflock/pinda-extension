@@ -9,6 +9,7 @@
   "permissions": [
     "activeTab",
     "storage",
-    "http://pinda.app/*"
+    "http://pinda.app/*",
+    "http://pinda.jamesspencemilwaukee.com/*"
   ]
 }
