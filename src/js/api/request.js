@@ -17,8 +17,8 @@ type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
 export default class Request {
     method:  Method;
     url: string;
-    params: Object;
-    headers: Object;
+    params: Object = {};
+    headers: Object = {};
 
     /**
      * Checks if a variable is defined.
