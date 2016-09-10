@@ -6,10 +6,10 @@ import React from 'react';
 type ComponentKey = 'name' | 'email' | 'password' | 'confirmPassword';
 
 export default class AuthForm extends React.Component {
-    emailInput: React.Element<any>;
-    passwordInput: React.Element<any>;
-    confirmPasswordInput: React.Element<any>;
-    nameInput: React.Element<any>;
+    emailInput: HTMLInputElement;
+    passwordInput: HTMLInputElement;
+    confirmPasswordInput: HTMLInputElement;
+    nameInput: HTMLInputElement;
 
     state: {
         isRegistration: boolean;
@@ -35,22 +35,47 @@ export default class AuthForm extends React.Component {
         onSubmit: React.PropTypes.func.isRequired
     };
 
-    onSubmit(): void {
+    addToState(newState: Object): void {
+        let state: Object = this.state;
 
+        for (var key in newState) {
+            if (newState.hasOwnProperty(key)) {
+                state[key] = newState[key];
+            }
+        }
+
+        this.setState(state);
     }
+
+    onSubmit(e: Event): void {
+        e.preventDefault();
+
+        //TODO add input validation
+
+        if (this.isRegistration()) {
+            this.props.onSubmit(
+                this.emailInput.value,
+                this.passwordInput.value,
+                true,
+                this.nameInput.value
+            );
+        } else {
+            this.props.onSubmit(this.emailInput.value, this.passwordInput.value);
+        }
+    };
 
     isRegistration(): boolean {
         return this.state.isRegistration;
     }
 
-    inputRef(input: React.Element<any>, key: ComponentKey) {
-        let componentKey = `${key}Component`;
+    inputRef(input: HTMLInputElement, key: ComponentKey): void {
+        let componentKey = `${key}Input`;
 
         const self: any = this;
         self[componentKey] = input;
     }
 
-    toggleRegistration() {
+    toggleRegistration(): void {
         this.setState({
             isRegistration: !this.isRegistration()
         });

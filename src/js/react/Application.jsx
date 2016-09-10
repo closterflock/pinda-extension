@@ -19,6 +19,9 @@ export default class Application extends React.Component {
         self.onBackButton = self.onBackButton.bind(self);
         self.onNavButton = self.onNavButton.bind(self);
         self.contentMounted = self.contentMounted.bind(self);
+        self.attemptLogin = self.attemptLogin.bind(self);
+        self.loginSuccess = self.loginSuccess.bind(self);
+        self.loginFailure = self.loginFailure.bind(self);
     }
 
     onBackButton(active: boolean): void {
@@ -41,17 +44,23 @@ export default class Application extends React.Component {
             promise = APIRepository.login(email, password);
         }
 
+        console.log(this);
+        console.log(this.loginSuccess);
+        console.log(this.loginFailure);
+        //TODO reject on error response, so we can catch it here
         promise
             .then(this.loginSuccess.bind(this))
             .catch(this.loginFailure.bind(this));
     }
 
     loginSuccess(response: APIResponse) {
-
+        console.log('success');
+        console.log(response);
     }
 
     loginFailure(response: APIResponse) {
-
+        console.log('failure');
+        console.log(response);
     }
 
     render() {
