@@ -388,6 +388,15 @@ form {
   }
 }
 
+.auth-form {
+  label {
+    display: block;
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
 /**
 *Trumps
  */
