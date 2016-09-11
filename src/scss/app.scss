@@ -357,6 +357,10 @@ form {
 .content {
   position: relative;
   margin: 1em;
+
+  &.hidden {
+    display: none;
+  }
 }
 
 .menu {
@@ -394,6 +398,10 @@ form {
     &.hidden {
       display: none;
     }
+  }
+
+  &.hidden {
+    display: none;
   }
 }
 
