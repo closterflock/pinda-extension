@@ -141,8 +141,8 @@ export default class Request {
 
             request(self.prepareOptions(), function (error, response, body) {
                 var apiResponse = new APIResponse(response, body);
-                if (error) {
-                    response.setError(error);
+                if (error || apiResponse.failed()) {
+                    apiResponse.setError(error);
                     return reject(apiResponse);
                 } else {
                     return resolve(apiResponse);
