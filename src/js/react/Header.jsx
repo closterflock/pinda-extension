@@ -2,8 +2,9 @@
 // @flow
 
 import React from 'react';
+import binder from 'react-class-binder'
 
-export default class Header extends React.Component {
+export default class Header extends binder(React.Component) {
     static propTypes = {
         onBackButton: React.PropTypes.func.isRequired,
         onNavButton: React.PropTypes.func.isRequired,
@@ -23,13 +24,6 @@ export default class Header extends React.Component {
             navActive: false,
             navButtonHidden: (typeof props.navButtonHidden === 'boolean' ? props.navButtonHidden: true)
         };
-
-        const self: any = this;
-
-        self.backButtonShown = self.backButtonShown.bind(self);
-        self.toggleBackButtonShown = self.toggleBackButtonShown.bind(self);
-        self.navIsActive = self.navIsActive.bind(self);
-        self.toggleNav = self.toggleNav.bind(self);
     }
 
     getCurrentState(): Object {

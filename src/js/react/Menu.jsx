@@ -2,8 +2,9 @@
 // @flow
 
 import React from 'react';
+import binder from 'react-class-binder'
 
-export default class Menu extends React.Component {
+export default class Menu extends binder(React.Component) {
 
     state: {
         active: boolean
@@ -14,11 +15,6 @@ export default class Menu extends React.Component {
         this.state = {
             active: false,
         };
-
-        const self: any = this;
-
-        self.isActive = self.isActive.bind(self);
-        self.setActive = self.setActive.bind(self);
     }
 
     isActive(): boolean {

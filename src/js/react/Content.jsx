@@ -3,8 +3,9 @@
 
 import React from 'react';
 import Menu from './Menu.jsx';
+import binder from 'react-class-binder'
 
-export default class Content extends React.Component {
+export default class Content extends binder(React.Component) {
     menuComponent: Menu;
 
     state: {
@@ -14,17 +15,9 @@ export default class Content extends React.Component {
     constructor(props: Object) {
         super(props);
 
-        const self: any = this;
-
         this.state = {
             hidden: true
         };
-
-        self.menuMounted = self.menuMounted.bind(self);
-        self.setMenu = self.setMenu.bind(self);
-        self.isHidden = self.isHidden.bind(self);
-        self.show = self.show.bind(self);
-        self.hide = self.hide.bind(self);
     }
 
     isHidden(): boolean {

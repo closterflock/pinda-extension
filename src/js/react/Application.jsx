@@ -8,26 +8,12 @@ import APIRepository from './../api/api-repository';
 import APIResponse from './../api/api-response';
 import AuthForm from './AuthForm.jsx';
 import ChromeStorage from './../storage/chrome-storage';
+import binder from 'react-class-binder'
 
-export default class Application extends React.Component {
+export default class Application extends binder(React.Component) {
     contentComponent: Content;
     authFormCompoent: AuthForm;
     headerComponent: Header;
-
-    constructor(props: Object) {
-        super(props);
-
-        const self: any = this;
-
-        self.onBackButton = self.onBackButton.bind(self);
-        self.onNavButton = self.onNavButton.bind(self);
-        self.contentMounted = self.contentMounted.bind(self);
-        self.attemptLogin = self.attemptLogin.bind(self);
-        self.loginSuccess = self.loginSuccess.bind(self);
-        self.loginFailure = self.loginFailure.bind(self);
-        self.authFormMounted = self.authFormMounted.bind(self);
-        self.headerMounted = self.headerMounted.bind(self);
-    }
 
     onBackButton(active: boolean): void {
 

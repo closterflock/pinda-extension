@@ -2,10 +2,11 @@
 // @flow
 
 import React from 'react';
+import binder from 'react-class-binder'
 
 type ComponentKey = 'name' | 'email' | 'password' | 'confirmPassword';
 
-export default class AuthForm extends React.Component {
+export default class AuthForm extends binder(React.Component) {
     emailInput: HTMLInputElement;
     passwordInput: HTMLInputElement;
     confirmPasswordInput: HTMLInputElement;
@@ -18,20 +19,9 @@ export default class AuthForm extends React.Component {
     constructor(props: Object) {
         super(props);
 
-        const self: any = this;
-
         this.state = {
             isRegistration: false
         };
-
-        self.onSubmit = self.onSubmit.bind(this);
-        self.inputRef = self.inputRef.bind(this);
-        self.isRegistration = self.isRegistration.bind(this);
-        self.getIsRegistrationClass = self.getIsRegistrationClass.bind(this);
-        self.toggleRegistration = self.toggleRegistration.bind(this);
-        self.addToState = self.addToState.bind(this);
-        self.hide = self.hide.bind(this);
-        self.show = self.show.bind(this);
     }
 
     static propTypes = {
