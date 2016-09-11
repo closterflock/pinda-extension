@@ -1,17 +1,63 @@
 'use strict';
 // @flow
 
+type ResponseStatus = 'error' | 'success';
+
+type ResponseBody = {
+    status: ResponseStatus,
+    message: string,
+    data: Object
+};
+
 export default class APIResponse {
 
     _error: any;
     _rawResponse: string;
     _body: Object;
     _responseObject: Object;
+    _status: 'error' | 'success';
 
-    constructor(response: Object, body: Object) {
+    constructor(response: Object, body: ResponseBody) {
         this.setResponseObject(response);
         this.setRawResponse(JSON.stringify(body));
         this.setBody(body);
+        this.setStatus(body.status);
+    }
+
+    /**
+     * Checks if a request failed.
+     *
+     * @returns {boolean}
+     */
+    failed(): boolean {
+        return (this.getStatus() === 'error');
+    }
+
+    /**
+     * Checks if a request succeeded.
+     *
+     * @returns {boolean}
+     */
+    succeeded(): boolean {
+        return !(this.failed());
+    }
+
+    /**
+     * Retrieves our status.
+     *
+     * @returns {string|string}
+     */
+    getStatus(): ResponseStatus {
+        return this._status;
+    }
+
+    /**
+     * Sets our status.
+     *
+     * @param ResponseStatus
+     */
+    setStatus(ResponseStatus) {
+        this._status = status;
     }
 
     /**
