@@ -98,7 +98,7 @@ export default class AuthForm extends React.Component {
                 </label>
                 <label htmlFor="password">
                     Password
-                    <input type="text" id="password" name="password" ref={(i) => this.inputRef(i, 'password')}/>
+                    <input type="password" id="password" name="password" ref={(i) => this.inputRef(i, 'password')}/>
                 </label>
                 <label htmlFor="register">
                     Register
