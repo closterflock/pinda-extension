@@ -12,7 +12,7 @@ import binder from 'react-class-binder'
 
 export default class Application extends binder(React.Component) {
     contentComponent: Content;
-    authFormCompoent: AuthForm;
+    authFormComponent: AuthForm;
     headerComponent: Header;
 
     onBackButton(active: boolean): void {
@@ -28,7 +28,7 @@ export default class Application extends binder(React.Component) {
     }
 
     authFormMounted(authForm: AuthForm): void {
-        this.authFormCompoent = authForm;
+        this.authFormComponent = authForm;
     }
 
     headerMounted(header: Header): void {
@@ -55,7 +55,7 @@ export default class Application extends binder(React.Component) {
         console.log(response);
         ChromeStorage.setAccessToken(response.getBody().data.token);
         //TODO show menu button
-        this.authFormCompoent.hide();
+        this.authFormComponent.hide();
         this.contentComponent.show();
         this.headerComponent.toggleNavHidden(false);
     }
@@ -64,6 +64,7 @@ export default class Application extends binder(React.Component) {
         //TODO show validation errors
         console.log('failure');
         console.log(response);
+        this.authFormComponent.setErrors(response.getBody().data);
     }
 
     render() {

@@ -14,13 +14,15 @@ export default class AuthForm extends binder(React.Component) {
 
     state: {
         isRegistration: boolean;
+        errors: Array<string>
     };
 
     constructor(props: Object) {
         super(props);
 
         this.state = {
-            isRegistration: false
+            isRegistration: false,
+            errors: []
         };
     }
 
@@ -42,6 +44,7 @@ export default class AuthForm extends binder(React.Component) {
 
     onSubmit(e: Event): void {
         e.preventDefault();
+        this.clearErrors();
 
         //TODO add input validation
 
@@ -90,9 +93,30 @@ export default class AuthForm extends binder(React.Component) {
         return this.isRegistration() ? '' : 'hidden';
     }
 
+    clearErrors(): void {
+        this.setState({
+            errors: []
+        });
+    }
+
+    setErrors(errors: Array<string>): void {
+        this.setState({
+            errors: errors
+        });
+    }
+
     render() {
+        let errors: Array<React.Element<any>> = this.state.errors.map(function (error, index) {
+            return (
+                <p key={index} className="error">
+                    {error}
+                </p>
+            );
+        });
+
         return (
             <form className={`auth-form ${this.state.hidden ? 'hidden' : ''}`}>
+                {errors}
                 <label htmlFor="name" className={this.getIsRegistrationClass()}>
                     Name
                     <input type="text" id="name" name="name" ref={(i) => this.inputRef(i, 'name')}/>
