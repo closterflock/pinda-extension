@@ -121,7 +121,7 @@ export default class AuthForm extends React.Component {
                 </label>
                 <label htmlFor="confirmPassword" className={this.getIsRegistrationClass()}>
                     Confirm Password
-                    <input type="text" id="confirmPassword" name="confirmPassword" ref={(i) => this.inputRef(i, 'confirmPassword')}/>
+                    <input type="password" id="confirmPassword" name="confirmPassword" ref={(i) => this.inputRef(i, 'confirmPassword')}/>
                 </label>
                 <button onClick={this.onSubmit}>Submit</button>
             </form>
