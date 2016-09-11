@@ -43,20 +43,20 @@ export default class APIResponse {
     }
 
     /**
-     * Retrieves our status.
+     * Retrieves the status.
      *
-     * @returns {string|string}
+     * @returns ResponseStatus
      */
     getStatus(): ResponseStatus {
         return this._status;
     }
 
     /**
-     * Sets our status.
+     * Sets the status.
      *
-     * @param ResponseStatus
+     * @param status
      */
-    setStatus(ResponseStatus) {
+    setStatus(status: ResponseStatus) {
         this._status = status;
     }
 
