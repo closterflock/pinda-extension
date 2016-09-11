@@ -29,6 +29,9 @@ export default class AuthForm extends React.Component {
         self.isRegistration = self.isRegistration.bind(this);
         self.getIsRegistrationClass = self.getIsRegistrationClass.bind(this);
         self.toggleRegistration = self.toggleRegistration.bind(this);
+        self.addToState = self.addToState.bind(this);
+        self.hide = self.hide.bind(this);
+        self.show = self.show.bind(this);
     }
 
     static propTypes = {
@@ -64,6 +67,18 @@ export default class AuthForm extends React.Component {
         }
     };
 
+    hide(): void {
+        this.addToState({
+            hidden: true
+        });
+    }
+
+    show(): void {
+        this.addToState({
+            hidden: false
+        });
+    }
+
     isRegistration(): boolean {
         return this.state.isRegistration;
     }
@@ -87,7 +102,7 @@ export default class AuthForm extends React.Component {
 
     render() {
         return (
-            <form className="auth-form">
+            <form className={`auth-form ${this.state.hidden ? 'hidden' : ''}`}>
                 <label htmlFor="name" className={this.getIsRegistrationClass()}>
                     Name
                     <input type="text" id="name" name="name" ref={(i) => this.inputRef(i, 'name')}/>

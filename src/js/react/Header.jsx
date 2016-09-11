@@ -6,7 +6,8 @@ import React from 'react';
 export default class Header extends React.Component {
     static propTypes = {
         onBackButton: React.PropTypes.func.isRequired,
-        onNavButton: React.PropTypes.func.isRequired
+        onNavButton: React.PropTypes.func.isRequired,
+        navButtonHidden: React.PropTypes.bool
     };
 
     state: {
@@ -20,7 +21,7 @@ export default class Header extends React.Component {
         this.state = {
             backButtonShown: false,
             navActive: false,
-            navButtonHidden: false
+            navButtonHidden: (typeof props.navButtonHidden === 'boolean' ? props.navButtonHidden: true)
         };
 
         const self: any = this;

@@ -7,9 +7,12 @@ import Content from './Content.jsx';
 import APIRepository from './../api/api-repository';
 import APIResponse from './../api/api-response';
 import AuthForm from './AuthForm.jsx';
+import ChromeStorage from './../storage/chrome-storage';
 
 export default class Application extends React.Component {
     contentComponent: Content;
+    authFormCompoent: AuthForm;
+    headerComponent: Header;
 
     constructor(props: Object) {
         super(props);
@@ -22,6 +25,8 @@ export default class Application extends React.Component {
         self.attemptLogin = self.attemptLogin.bind(self);
         self.loginSuccess = self.loginSuccess.bind(self);
         self.loginFailure = self.loginFailure.bind(self);
+        self.authFormMounted = self.authFormMounted.bind(self);
+        self.headerMounted = self.headerMounted.bind(self);
     }
 
     onBackButton(active: boolean): void {
@@ -36,6 +41,14 @@ export default class Application extends React.Component {
         this.contentComponent = content;
     }
 
+    authFormMounted(authForm: AuthForm): void {
+        this.authFormCompoent = authForm;
+    }
+
+    headerMounted(header: Header): void {
+        this.headerComponent = header;
+    }
+
     attemptLogin(email: string, password: string, register: boolean = false, name: string = '') {
         let promise: ?Promise<APIResponse> = null;
         if (register) {
@@ -45,8 +58,6 @@ export default class Application extends React.Component {
         }
 
         console.log(this);
-        console.log(this.loginSuccess);
-        console.log(this.loginFailure);
         //TODO reject on error response, so we can catch it here
         promise
             .then(this.loginSuccess.bind(this))
@@ -56,19 +67,31 @@ export default class Application extends React.Component {
     loginSuccess(response: APIResponse) {
         console.log('success');
         console.log(response);
+        ChromeStorage.setAccessToken(response.getBody().data.token);
+        //TODO show menu button
+        this.authFormCompoent.hide();
+        this.contentComponent.show();
+        this.headerComponent.toggleNavHidden(false);
     }
 
     loginFailure(response: APIResponse) {
+        //TODO show validation errors
         console.log('failure');
         console.log(response);
     }
 
     render() {
+        //TODO determine if we should hide nav based on if we have an auth token
         return (
             <div className='app'>
-                <Header onBackButton={this.onBackButton} onNavButton={this.onNavButton}/>
-                {/*<Content ref={this.contentMounted}/>*/}
-                <AuthForm onSubmit={this.attemptLogin}/>
+                <Header
+                    ref={this.headerMounted}
+                    onBackButton={this.onBackButton}
+                    onNavButton={this.onNavButton}
+                    navButtonHidden={true}
+                />
+                <Content ref={this.contentMounted}/>
+                <AuthForm ref={this.authFormMounted} onSubmit={this.attemptLogin}/>
             </div>
         );
     }

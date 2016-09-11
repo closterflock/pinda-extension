@@ -12,7 +12,7 @@ export default class Menu extends React.Component {
     constructor(props: Object) {
         super(props);
         this.state = {
-            active: false
+            active: false,
         };
 
         const self: any = this;
@@ -36,8 +36,9 @@ export default class Menu extends React.Component {
     }
 
     render() {
+        let classes = `menu ${this.isActive() ? 'active' : ''}`;
         return (
-            <div className={'menu' + (this.isActive() ? ' active' : '')}>
+            <div className={classes}>
                 <h1>Menu</h1>
                 <ul className='nav'>
                     <li className='item'>Logout</li>
