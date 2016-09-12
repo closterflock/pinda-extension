@@ -8,8 +8,16 @@ import binder from 'react-class-binder'
 export default class Content extends binder(React.Component) {
     menuComponent: Menu;
 
+    state: {
+        menuHidden: boolean;
+    };
+
     constructor(props: Object) {
         super(props);
+
+        this.state = {
+            menuActive: false
+        };
     }
 
     isHidden(): boolean {
@@ -21,7 +29,9 @@ export default class Content extends binder(React.Component) {
     }
 
     setMenu(state: boolean): void {
-        this.menuComponent.setActive(state);
+        this.setState({
+            menuActive: state
+        });
     }
 
     render() {
@@ -30,7 +40,10 @@ export default class Content extends binder(React.Component) {
                 <h1>
                     Content
                 </h1>
-                <Menu ref={this.menuMounted}/>
+                <Menu
+                    ref={this.menuMounted}
+                    active={this.state.menuActive}
+                />
             </section>
         );
     }

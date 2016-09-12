@@ -6,29 +6,12 @@ import binder from 'react-class-binder'
 
 export default class Menu extends binder(React.Component) {
 
-    state: {
-        active: boolean
+    static propTypes = {
+        active: React.PropTypes.bool.isRequired
     };
 
-    constructor(props: Object) {
-        super(props);
-        this.state = {
-            active: false,
-        };
-    }
-
     isActive(): boolean {
-        return this.state.active;
-    }
-
-    setActive(newState: boolean): void {
-        if (typeof newState !== 'boolean') {
-            newState = !this.isActive();
-        }
-
-        var state: Object = this.state;
-        state.active = newState;
-        this.setState(state);
+        return this.props.active;
     }
 
     render() {
