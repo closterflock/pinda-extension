@@ -13,7 +13,6 @@ import binder from 'react-class-binder'
 export default class Application extends binder(React.Component) {
     contentComponent: Content;
     authFormComponent: AuthForm;
-    headerComponent: Header;
 
     static propTypes = {
         loggedIn: React.PropTypes.bool
@@ -48,10 +47,6 @@ export default class Application extends binder(React.Component) {
 
     authFormMounted(authForm: AuthForm): void {
         this.authFormComponent = authForm;
-    }
-
-    headerMounted(header: Header): void {
-        this.headerComponent = header;
     }
 
     attemptLogin(email: string, password: string, register: boolean = false, name: string = '') {
@@ -99,7 +94,6 @@ export default class Application extends binder(React.Component) {
         return (
             <div className='app'>
                 <Header
-                    ref={this.headerMounted}
                     onBackButton={this.onBackButton}
                     onNavButton={this.onNavButton}
                     backButtonShown={false}
