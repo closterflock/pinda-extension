@@ -173,12 +173,10 @@ export default class Request {
         }
 
         if (typeof options.form === 'undefined') {
-            if (this.method == 'POST' || this.method == 'PUT') {
-                options.json = this.params;
-            } else {
-                options.form = this.params;
-            }
+            options.form = this.params;
         }
+
+        options.json = true;
 
         return options;
     };
