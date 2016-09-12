@@ -65,8 +65,6 @@ export default class Application extends binder(React.Component) {
             promise = APIRepository.login(email, password);
         }
 
-        console.log(this);
-        //TODO reject on error response, so we can catch it here
         promise
             .then(this.loginSuccess.bind(this))
             .catch(this.loginFailure.bind(this));
