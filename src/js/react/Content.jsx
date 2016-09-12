@@ -38,6 +38,13 @@ export default class Content extends binder(React.Component) {
         });
     }
 
+    logoutClicked(): void {
+        this.setState({
+            menuActive: false
+        });
+        this.props.onLogout();
+    }
+
     render() {
         return (
             <section className={`content ${this.isHidden() ? 'hidden' : ''}`}>
@@ -47,7 +54,7 @@ export default class Content extends binder(React.Component) {
                 <Menu
                     ref={this.menuMounted}
                     active={this.state.menuActive}
-                    onLogout={this.props.onLogout}
+                    onLogout={this.logoutClicked}
                 />
             </section>
         );

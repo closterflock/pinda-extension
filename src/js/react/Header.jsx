@@ -24,8 +24,10 @@ export default class Header extends binder(React.Component) {
         };
     }
 
-    toggleNav() {
-        let newState = !this.navIsActive();
+    toggleNav(newState: boolean) {
+        if (typeof newState !== 'boolean') {
+            newState = !this.navIsActive();
+        }
         this.props.onNavButton(newState);
         this.setState({
             navActive: newState

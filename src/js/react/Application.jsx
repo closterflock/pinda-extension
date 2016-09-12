@@ -49,6 +49,10 @@ export default class Application extends binder(React.Component) {
         this.authFormComponent = authForm;
     }
 
+    headerMounted(header: Header): void {
+        this.headerComponent = header;
+    }
+
     attemptLogin(email: string, password: string, register: boolean = false, name: string = '') {
         let promise: ?Promise<APIResponse> = null;
         if (register) {
@@ -82,6 +86,7 @@ export default class Application extends binder(React.Component) {
 
     logout(): void {
         let self = this;
+        self.headerComponent.toggleNav(false);
         ChromeStorage.clearAccessToken().then(function () {
             self.setState({
                 loggedIn: false
@@ -94,6 +99,7 @@ export default class Application extends binder(React.Component) {
         return (
             <div className='app'>
                 <Header
+                    ref={this.headerMounted}
                     onBackButton={this.onBackButton}
                     onNavButton={this.onNavButton}
                     backButtonShown={false}
