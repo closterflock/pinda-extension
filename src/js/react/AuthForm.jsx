@@ -27,7 +27,8 @@ export default class AuthForm extends binder(React.Component) {
     }
 
     static propTypes = {
-        onSubmit: React.PropTypes.func.isRequired
+        onSubmit: React.PropTypes.func.isRequired,
+        hidden: React.PropTypes.bool.isRequired
     };
 
     addToState(newState: Object): void {
@@ -59,18 +60,6 @@ export default class AuthForm extends binder(React.Component) {
             this.props.onSubmit(this.emailInput.value, this.passwordInput.value);
         }
     };
-
-    hide(): void {
-        this.addToState({
-            hidden: true
-        });
-    }
-
-    show(): void {
-        this.addToState({
-            hidden: false
-        });
-    }
 
     isRegistration(): boolean {
         return this.state.isRegistration;
@@ -115,7 +104,7 @@ export default class AuthForm extends binder(React.Component) {
         });
 
         return (
-            <form className={`auth-form ${this.state.hidden ? 'hidden' : ''}`}>
+            <form className={`auth-form ${this.props.hidden ? 'hidden' : ''}`}>
                 {errors}
                 <label htmlFor="name" className={this.getIsRegistrationClass()}>
                     Name

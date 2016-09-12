@@ -15,6 +15,25 @@ export default class Application extends binder(React.Component) {
     authFormComponent: AuthForm;
     headerComponent: Header;
 
+    static propTypes = {
+        loggedIn: React.PropTypes.bool
+    };
+
+    state: {
+        loggedIn: boolean;
+    };
+
+    constructor(props) {
+        if (typeof props.loggedIn !== 'boolean') {
+            props.loggedIn = false;
+        }
+        super(props);
+
+        this.state = {
+            loggedIn: props.loggedIn
+        };
+    }
+
     onBackButton(active: boolean): void {
 
     }
@@ -51,20 +70,18 @@ export default class Application extends binder(React.Component) {
     }
 
     loginSuccess(response: APIResponse) {
-        console.log('success');
-        console.log(response);
         ChromeStorage.setAccessToken(response.getBody().data.token);
-        //TODO show menu button
-        this.authFormComponent.hide();
-        this.contentComponent.show();
-        this.headerComponent.toggleNavHidden(false);
+        this.setState({
+            loggedIn: true,
+        });
     }
 
     loginFailure(response: APIResponse) {
-        //TODO show validation errors
-        console.log('failure');
-        console.log(response);
         this.authFormComponent.setErrors(response.getBody().data);
+    }
+
+    isLoggedIn(): boolean {
+        return this.state.loggedIn;
     }
 
     render() {
@@ -75,10 +92,17 @@ export default class Application extends binder(React.Component) {
                     ref={this.headerMounted}
                     onBackButton={this.onBackButton}
                     onNavButton={this.onNavButton}
-                    navButtonHidden={true}
+                    navButtonHidden={!this.isLoggedIn()}
                 />
-                <Content ref={this.contentMounted}/>
-                <AuthForm ref={this.authFormMounted} onSubmit={this.attemptLogin}/>
+                <Content
+                    ref={this.contentMounted}
+                    hidden={!this.isLoggedIn()}
+                />
+                <AuthForm
+                    ref={this.authFormMounted}
+                    onSubmit={this.attemptLogin}
+                    hidden={this.isLoggedIn()}
+                />
             </div>
         );
     }

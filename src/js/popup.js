@@ -7,8 +7,16 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Application from './react/Application.jsx';
+import ChromeStorage from './storage/chrome-storage';
 
-ReactDom.render(React.createElement(Application), document.querySelector('.popup'));
+ChromeStorage.getAccessToken().then(function (token) {
+    ReactDom.render(
+        React.createElement(Application, {
+            loggedIn: typeof token !== 'undefined'
+        }),
+        document.querySelector('.popup')
+    );
+});
 
 // ChromeStorage.getAccessToken().then(function (authToken) {
 //     VueSettings.setAuthTokenHeader(authToken);

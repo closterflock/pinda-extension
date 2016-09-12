@@ -8,32 +8,12 @@ import binder from 'react-class-binder'
 export default class Content extends binder(React.Component) {
     menuComponent: Menu;
 
-    state: {
-        hidden: boolean
-    };
-
     constructor(props: Object) {
         super(props);
-
-        this.state = {
-            hidden: true
-        };
     }
 
     isHidden(): boolean {
-        return this.state.hidden;
-    }
-
-    show(): void {
-        let state: Object = this.state;
-        state.hidden = false;
-        this.setState(state);
-    }
-
-    hide(): void {
-        let state: Object = this.state;
-        state.hidden = true;
-        this.setState(state);
+        return this.props.hidden;
     }
 
     menuMounted(menu: Menu): void {

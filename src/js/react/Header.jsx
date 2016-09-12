@@ -8,70 +8,40 @@ export default class Header extends binder(React.Component) {
     static propTypes = {
         onBackButton: React.PropTypes.func.isRequired,
         onNavButton: React.PropTypes.func.isRequired,
-        navButtonHidden: React.PropTypes.bool
+        backButtonShown: React.PropTypes.bool.isRequired,
+        navButtonHidden: React.PropTypes.bool.isRequired
     };
 
     state: {
-        backButtonShown: boolean;
-        navActive: boolean;
-        navButtonHidden: boolean;
+        navActive: boolean
     };
 
     constructor(props: Object) {
         super(props);
+
         this.state = {
-            backButtonShown: false,
-            navActive: false,
-            navButtonHidden: (typeof props.navButtonHidden === 'boolean' ? props.navButtonHidden: true)
+            navActive: false
         };
     }
 
-    getCurrentState(): Object {
-        return this.state;
+    toggleNav() {
+        let newState = !this.navIsActive();
+        this.props.onNavButton(newState);
+        this.setState({
+            navActive: newState
+        });
     }
 
     backButtonShown(): boolean {
-        return this.getCurrentState().backButtonShown;
-    }
-
-    toggleBackButtonShown(newState: boolean): void {
-        if (typeof newState !== 'boolean') {
-            newState = !this.backButtonShown();
-        }
-        var state: Object = this.getCurrentState();
-
-        this.props.onBackButton(newState);
-        state.backButtonShown = newState;
-        this.setState(state);
+        return this.props.backButtonShown;
     }
 
     navIsActive(): boolean {
-        return this.getCurrentState().navActive;
-    }
-
-    toggleNav(newState: boolean): void {
-        if (typeof newState !== 'boolean') {
-            newState = !this.navIsActive();
-        }
-        var state: Object = this.getCurrentState();
-
-        this.props.onNavButton(newState);
-        state.navActive = newState;
-        this.setState(state);
-    }
-
-    toggleNavHidden(newState: boolean): void {
-        if (typeof newState !== 'boolean') {
-            newState = !this.navButtonHidden();
-        }
-        let state: Object = this.getCurrentState();
-
-        state.navButtonHidden = newState;
-        this.setState(state);
+        return this.state.navActive;
     }
 
     navButtonHidden(): boolean {
-        return this.getCurrentState().navButtonHidden;
+        return this.props.navButtonHidden;
     }
 
     render() {
