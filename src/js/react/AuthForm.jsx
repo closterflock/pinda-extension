@@ -44,22 +44,74 @@ export default class AuthForm extends binder(React.Component) {
     }
 
     onSubmit(e: Event): void {
+        var self = this;
         e.preventDefault();
-        this.clearErrors();
+        self.clearErrors();
 
         //TODO add input validation
 
-        if (this.isRegistration()) {
-            this.props.onSubmit(
-                this.emailInput.value,
-                this.passwordInput.value,
-                true,
-                this.nameInput.value
-            );
+        if (self.isRegistration()) {
+            self.validateRegistration().then(function (errors: Array<string>) {
+                if (errors.length > 0) {
+                    self.setErrors(errors);
+                    return;
+                }
+
+                self.props.onSubmit(
+                    self.emailInput.value,
+                    self.passwordInput.value,
+                    true,
+                    self.nameInput.value
+                );
+            });
         } else {
-            this.props.onSubmit(this.emailInput.value, this.passwordInput.value);
+            self.validateLogin().then(function (errors: Array<string>) {
+                if (errors.length > 0) {
+                    self.setErrors(errors);
+                    return;
+                }
+
+                self.props.onSubmit(
+                    self.emailInput.value,
+                    self.passwordInput.value
+                );
+            });
         }
     };
+
+    validateLogin(): Promise<Array<string>> {
+        let self = this;
+        let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        return new Promise(function (resolve, reject) {
+            let errors: Array<String> = [];
+            if (!regex.test(self.emailInput.value)) {
+                errors.push('Please provide a valid email address.');
+            }
+            
+            if (self.passwordInput.value.length < 1) {
+                errors.push('Please provide a password.');
+            }
+
+            return resolve(errors);
+        });
+    }
+
+    validateRegistration(): Promise<Array<string>> {
+        let self = this;
+        return self.validateLogin().then(function (errors: Array<string>) {
+            if (self.nameInput.value.length < 1) {
+                errors.push('Please provide a name.');
+            }
+
+            if (self.confirmPasswordInput.value.length < 1) {
+                errors.push('Please confirm your password.');
+            } else if (self.confirmPasswordInput.value !== self.passwordInput.value) {
+                errors.push('Please ensure your passwords match.');
+            }
+
+            return errors;
+        });
+    }
 
     isRegistration(): boolean {
         return this.state.isRegistration;
