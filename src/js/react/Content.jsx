@@ -13,7 +13,7 @@ export default class Content extends binder(React.Component) {
     };
 
     state: {
-        menuHidden: boolean;
+        menuActive: boolean;
     };
 
     constructor(props: Object) {

@@ -23,7 +23,7 @@ export default class Application extends binder(React.Component) {
         loggedIn: boolean;
     };
 
-    constructor(props) {
+    constructor(props: Object) {
         if (typeof props.loggedIn !== 'boolean') {
             props.loggedIn = false;
         }
