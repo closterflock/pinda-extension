@@ -45,7 +45,6 @@ class ChromeStorage {
     remove(key: string): Promise<*> {
         var self = this;
         return new Promise(function (resolve) {
-            console.log('deleting ' + key);
             self._storage.remove(key, resolve);
         });
     };
