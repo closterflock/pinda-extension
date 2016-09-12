@@ -95,7 +95,6 @@ export default class Application extends binder(React.Component) {
     }
 
     render() {
-        //TODO determine if we should hide nav based on if we have an auth token
         return (
             <div className='app'>
                 <Header
