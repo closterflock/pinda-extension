@@ -3,10 +3,11 @@
 
 class ChromeStorage {
     _storage: any;
-    _accessTokenKey: 'accessToken';
+    _accessTokenKey: string;
 
     constructor() {
         this._storage = chrome.storage.local;
+        this._accessTokenKey = 'accessToken';
     }
 
     /**
@@ -44,6 +45,7 @@ class ChromeStorage {
     remove(key: string): Promise<*> {
         var self = this;
         return new Promise(function (resolve) {
+            console.log('deleting ' + key);
             self._storage.remove(key, resolve);
         });
     };

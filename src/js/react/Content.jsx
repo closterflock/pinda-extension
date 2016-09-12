@@ -8,6 +8,10 @@ import binder from 'react-class-binder'
 export default class Content extends binder(React.Component) {
     menuComponent: Menu;
 
+    static propTypes = {
+        onLogout: React.PropTypes.func.isRequired
+    };
+
     state: {
         menuHidden: boolean;
     };
@@ -43,6 +47,7 @@ export default class Content extends binder(React.Component) {
                 <Menu
                     ref={this.menuMounted}
                     active={this.state.menuActive}
+                    onLogout={this.props.onLogout}
                 />
             </section>
         );

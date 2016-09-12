@@ -84,6 +84,15 @@ export default class Application extends binder(React.Component) {
         return this.state.loggedIn;
     }
 
+    logout(): void {
+        let self = this;
+        ChromeStorage.clearAccessToken().then(function () {
+            self.setState({
+                loggedIn: false
+            });
+        });
+    }
+
     render() {
         //TODO determine if we should hide nav based on if we have an auth token
         return (
@@ -98,6 +107,7 @@ export default class Application extends binder(React.Component) {
                 <Content
                     ref={this.contentMounted}
                     hidden={!this.isLoggedIn()}
+                    onLogout={this.logout}
                 />
                 <AuthForm
                     ref={this.authFormMounted}

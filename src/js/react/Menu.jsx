@@ -7,7 +7,8 @@ import binder from 'react-class-binder'
 export default class Menu extends binder(React.Component) {
 
     static propTypes = {
-        active: React.PropTypes.bool.isRequired
+        active: React.PropTypes.bool.isRequired,
+        onLogout: React.PropTypes.func.isRequired
     };
 
     isActive(): boolean {
@@ -20,7 +21,7 @@ export default class Menu extends binder(React.Component) {
             <div className={classes}>
                 <h1>Menu</h1>
                 <ul className='nav'>
-                    <li className='item'>Logout</li>
+                    <li className='item' onClick={this.props.onLogout}>Logout</li>
                 </ul>
             </div>
         );
