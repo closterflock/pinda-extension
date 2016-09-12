@@ -23,6 +23,7 @@ export default class Application extends binder(React.Component) {
     state: {
         loggedIn: boolean;
         menuActive: boolean;
+        links: Array<Object>;
     };
 
     constructor(props: Object) {
@@ -33,7 +34,8 @@ export default class Application extends binder(React.Component) {
 
         this.state = {
             loggedIn: props.loggedIn,
-            menuActive: false
+            menuActive: false,
+            links: []
         };
     }
 
@@ -105,8 +107,12 @@ export default class Application extends binder(React.Component) {
     }
 
     onSearch(term: string) {
+        var self = this;
         APIRepository.search(term).then(function (response: APIResponse) {
-            console.log(response);
+            let data: Array<Object> = response.getData().links;
+            self.setState({
+                links: data
+            });
         });
     }
 
@@ -126,6 +132,7 @@ export default class Application extends binder(React.Component) {
                     ref={this.contentMounted}
                     hidden={!this.isLoggedIn()}
                     onSearch={this.onSearch}
+                    links={this.state.links}
                 />
                 <AuthForm
                     ref={this.authFormMounted}

@@ -4,11 +4,13 @@
 import React from 'react';
 import binder from 'react-class-binder';
 import SearchBar from './SearchBar.jsx';
+import LinkList from './LinkList.jsx';
 
 export default class Content extends binder(React.Component) {
     static propTypes = {
         hidden: React.PropTypes.bool.isRequired,
-        onSearch: React.PropTypes.func.isRequired
+        onSearch: React.PropTypes.func.isRequired,
+        links: React.PropTypes.array.isRequired
     };
 
     isHidden(): boolean {
@@ -22,6 +24,7 @@ export default class Content extends binder(React.Component) {
                     Content
                 </h1>
                 <SearchBar onSearch={this.props.onSearch}/>
+                <LinkList links={this.props.links} />
             </section>
         );
     }
