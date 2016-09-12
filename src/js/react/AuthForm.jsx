@@ -31,18 +31,6 @@ export default class AuthForm extends binder(React.Component) {
         hidden: React.PropTypes.bool.isRequired
     };
 
-    addToState(newState: Object): void {
-        let state: Object = this.state;
-
-        for (var key in newState) {
-            if (newState.hasOwnProperty(key)) {
-                state[key] = newState[key];
-            }
-        }
-
-        this.setState(state);
-    }
-
     clearInputs(): void {
         this.emailInput.value = '';
         this.passwordInput.value = '';
