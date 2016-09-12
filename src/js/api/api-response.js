@@ -132,4 +132,13 @@ export default class APIResponse {
         this._responseObject = value;
     }
 
+    /**
+     * Retrieves the data.
+     *
+     * @returns {Object}
+     */
+    getData(): Object {
+        return this.getBody().data;
+    }
+
 }
