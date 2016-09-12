@@ -67,7 +67,7 @@ class ChromeStorage {
      * @param defaultValue
      * @returns {Promise}
      */
-    get(key: string, defaultValue: any): Promise<*> {
+    get(key: string, defaultValue: any = undefined): Promise<*> {
         var self = this;
         return new Promise(function (resolve) {
             self._storage.get(key, function (values) {
