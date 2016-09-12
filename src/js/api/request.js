@@ -8,7 +8,7 @@ type Options = {
     url: string;
     method: string;
     headers: Object;
-    json?: Object;
+    json?: boolean;
     form?: Object;
 }
 
