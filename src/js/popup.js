@@ -10,9 +10,10 @@ import Application from './react/Application.jsx';
 import ChromeStorage from './storage/chrome-storage';
 
 ChromeStorage.getAccessToken().then(function (token) {
+    let loggedIn = (typeof token !== 'undefined');
     ReactDom.render(
         React.createElement(Application, {
-            loggedIn: typeof token !== 'undefined'
+            loggedIn: loggedIn
         }),
         document.querySelector('.popup')
     );
