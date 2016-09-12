@@ -70,6 +70,7 @@ export default class Application extends binder(React.Component) {
     }
 
     loginSuccess(response: APIResponse) {
+        this.authFormComponent.clearInputs();
         ChromeStorage.setAccessToken(response.getBody().data.token);
         this.setState({
             loggedIn: true,

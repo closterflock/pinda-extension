@@ -43,6 +43,13 @@ export default class AuthForm extends binder(React.Component) {
         this.setState(state);
     }
 
+    clearInputs(): void {
+        this.emailInput.value = '';
+        this.passwordInput.value = '';
+        this.confirmPasswordInput.value = '';
+        this.nameInput.value = '';
+    }
+
     onSubmit(e: Event): void {
         var self = this;
         e.preventDefault();
