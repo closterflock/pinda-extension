@@ -9,6 +9,7 @@ import APIResponse from './../api/api-response';
 import AuthForm from './AuthForm.jsx';
 import ChromeStorage from './../storage/chrome-storage';
 import binder from 'react-class-binder'
+import Menu from './Menu.jsx'
 
 export default class Application extends binder(React.Component) {
     contentComponent: Content;
@@ -20,6 +21,7 @@ export default class Application extends binder(React.Component) {
 
     state: {
         loggedIn: boolean;
+        menuActive: boolean;
     };
 
     constructor(props: Object) {
@@ -29,7 +31,8 @@ export default class Application extends binder(React.Component) {
         super(props);
 
         this.state = {
-            loggedIn: props.loggedIn
+            loggedIn: props.loggedIn,
+            menuActive: false
         };
     }
 
@@ -73,6 +76,7 @@ export default class Application extends binder(React.Component) {
         ChromeStorage.setAccessToken(response.getBody().data.token);
         this.setState({
             loggedIn: true,
+            menuActive: false
         });
     }
 
@@ -86,11 +90,18 @@ export default class Application extends binder(React.Component) {
 
     logout(): void {
         let self = this;
-        self.headerComponent.toggleNav(false);
         ChromeStorage.clearAccessToken().then(function () {
             self.setState({
-                loggedIn: false
+                loggedIn: false,
+                menuActive: false
             });
+        });
+    }
+
+    toggleMenu(): void {
+        let newState = !(this.state.menuActive);
+        this.setState({
+            menuActive: newState
         });
     }
 
@@ -103,16 +114,22 @@ export default class Application extends binder(React.Component) {
                     onNavButton={this.onNavButton}
                     backButtonShown={false}
                     navButtonHidden={!this.isLoggedIn()}
+                    navActive={this.state.menuActive}
+                    toggleMenu={this.toggleMenu}
                 />
                 <Content
                     ref={this.contentMounted}
                     hidden={!this.isLoggedIn()}
-                    onLogout={this.logout}
                 />
                 <AuthForm
                     ref={this.authFormMounted}
                     onSubmit={this.attemptLogin}
                     hidden={this.isLoggedIn()}
+                />
+                <Menu
+                    ref={this.menuMounted}
+                    active={this.state.menuActive}
+                    onLogout={this.logout}
                 />
             </div>
         );

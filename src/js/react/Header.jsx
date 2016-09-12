@@ -9,37 +9,17 @@ export default class Header extends binder(React.Component) {
         onBackButton: React.PropTypes.func.isRequired,
         onNavButton: React.PropTypes.func.isRequired,
         backButtonShown: React.PropTypes.bool.isRequired,
-        navButtonHidden: React.PropTypes.bool.isRequired
+        navButtonHidden: React.PropTypes.bool.isRequired,
+        navActive: React.PropTypes.bool.isRequired,
+        toggleMenu: React.PropTypes.func.isRequired
     };
-
-    state: {
-        navActive: boolean
-    };
-
-    constructor(props: Object) {
-        super(props);
-
-        this.state = {
-            navActive: false
-        };
-    }
-
-    toggleNav(newState: boolean) {
-        if (typeof newState !== 'boolean') {
-            newState = !this.navIsActive();
-        }
-        this.props.onNavButton(newState);
-        this.setState({
-            navActive: newState
-        });
-    }
 
     backButtonShown(): boolean {
         return this.props.backButtonShown;
     }
 
     navIsActive(): boolean {
-        return this.state.navActive;
+        return this.props.navActive;
     }
 
     navButtonHidden(): boolean {
@@ -58,7 +38,7 @@ export default class Header extends binder(React.Component) {
                 <h1 className="header-text">
                     Pinda
                 </h1>
-                <div className={navClasses} onClick={this.toggleNav}>
+                <div className={navClasses} onClick={this.props.toggleMenu}>
                     <div className='icon'></div>
                 </div>
             </div>
