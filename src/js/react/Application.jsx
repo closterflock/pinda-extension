@@ -14,6 +14,7 @@ import Menu from './Menu.jsx'
 export default class Application extends binder(React.Component) {
     contentComponent: Content;
     authFormComponent: AuthForm;
+    headerComponent: Header;
 
     static propTypes = {
         loggedIn: React.PropTypes.bool
