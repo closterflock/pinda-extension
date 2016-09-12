@@ -92,6 +92,7 @@ export default class Application extends binder(React.Component) {
                     ref={this.headerMounted}
                     onBackButton={this.onBackButton}
                     onNavButton={this.onNavButton}
+                    backButtonShown={false}
                     navButtonHidden={!this.isLoggedIn()}
                 />
                 <Content
