@@ -106,6 +106,12 @@ export default class Application extends binder(React.Component) {
         });
     }
 
+    onSearch(term: string) {
+        APIRepository.search(term).then(function (response: APIResponse) {
+            console.log(response);
+        });
+    }
+
     render() {
         return (
             <div className='app'>
@@ -121,6 +127,7 @@ export default class Application extends binder(React.Component) {
                 <Content
                     ref={this.contentMounted}
                     hidden={!this.isLoggedIn()}
+                    onSearch={this.onSearch}
                 />
                 <AuthForm
                     ref={this.authFormMounted}

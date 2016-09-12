@@ -55,6 +55,23 @@ class APIRepository {
     };
 
     /**
+     * Searches for links.
+     *
+     * @param term
+     * @returns {Promise.<APIResponse>}
+     */
+    search(term: string): Promise<APIResponse> {
+        let request: Request = this.prepareRequest();
+        request.setMethod('GET');
+        request.setUrl(this.constructor.getBaseUrl() + '/api/v1/links/search');
+        request.setParams({
+            term: term
+        });
+
+        return request.makeRequest();
+    }
+
+    /**
      * Attempts login.
      *
      * @param email
