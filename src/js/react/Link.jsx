@@ -21,6 +21,7 @@ export default class Link extends binder(React.Component) {
                 <a href={this.props.url}>
                     <h3>{this.props.title}</h3>
                 </a>
+                <i className="fa fa-pencil"/>
                 {description}
             </div>
         );
