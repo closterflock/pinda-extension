@@ -27,7 +27,6 @@ gulp.task('start', function () {
 gulp.task('copy', function () {
     output.log('Copying all those top-level files');
     paths.files.forEach(function (path) {
-        console.log(path);
         gulp.src(path.src)
             .pipe(gulp.dest(path.dest));
     });
