@@ -88,7 +88,6 @@ export default class Link extends binder(React.Component) {
     }
 
     render(): React.Element<any> {
-        // let editButtonClass = 'fa fa-' + (this.isEditable() ? 'times': 'pencil');
         let editButtonClass = `fa fa-${this.isEditable() ? 'times' : 'pencil'}`;
         return (
             <form className='link' onSubmit={this.save}>

@@ -1,6 +1,9 @@
 'use strict';
 // @flow
 
+import APIRepository from './../api/api-repository';
+import APIResponse from './../api/api-response';
+
 import React from 'react';
 import binder from 'react-class-binder';
 import SearchBar from './SearchBar.jsx';
@@ -10,7 +13,8 @@ export default class Content extends binder(React.Component) {
     static propTypes = {
         hidden: React.PropTypes.bool.isRequired,
         onSearch: React.PropTypes.func.isRequired,
-        links: React.PropTypes.array.isRequired
+        links: React.PropTypes.array.isRequired,
+        onSaveLink: React.PropTypes.func.isRequired
     };
 
     isHidden(): boolean {
@@ -24,7 +28,7 @@ export default class Content extends binder(React.Component) {
                     Content
                 </h1>
                 <SearchBar onSearch={this.props.onSearch}/>
-                <LinkList links={this.props.links} />
+                <LinkList links={this.props.links} onSave={this.props.onSaveLink} />
             </section>
         );
     }

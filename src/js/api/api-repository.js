@@ -55,6 +55,22 @@ class APIRepository {
     };
 
     /**
+     * Updates a link.
+     *
+     * @param linkId
+     * @param data
+     * @returns {Promise.<APIResponse>}
+     */
+    updateLink(linkId: string, data: Object): Promise<APIResponse> {
+        let request: Request = this.prepareRequest();
+        request.setMethod('PUT');
+        request.setUrl(this.constructor.getBaseUrl() + '/api/v1/links/' + linkId);
+        request.setParams(data);
+
+        return request.makeRequest();
+    }
+
+    /**
      * Searches for links.
      *
      * @param term

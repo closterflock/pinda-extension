@@ -8,8 +8,9 @@ import APIRepository from './../api/api-repository';
 import APIResponse from './../api/api-response';
 import AuthForm from './AuthForm.jsx';
 import ChromeStorage from './../storage/chrome-storage';
-import binder from 'react-class-binder'
-import Menu from './Menu.jsx'
+import binder from 'react-class-binder';
+import Menu from './Menu.jsx';
+import Link from './Link.jsx';
 
 export default class Application extends binder(React.Component) {
     contentComponent: Content;
@@ -116,6 +117,24 @@ export default class Application extends binder(React.Component) {
         });
     }
 
+    updateLink(id: string, link: Link) {
+        let data: Object = link.getData();
+        APIRepository.updateLink(id, data).then(() => {
+            let links: Array<Object> = this.state.links.map((link: Object) => {
+                if (link.id === id) {
+                    link.title = data.title;
+                    link.url = data.url;
+                    link.description = data.description;
+                }
+                return link;
+            });
+
+            this.setState({
+                links: links
+            });
+        });
+    }
+
     render() {
         return (
             <div className='app'>
@@ -133,6 +152,7 @@ export default class Application extends binder(React.Component) {
                     hidden={!this.isLoggedIn()}
                     onSearch={this.onSearch}
                     links={this.state.links}
+                    onSaveLink={this.updateLink}
                 />
                 <AuthForm
                     ref={this.authFormMounted}
