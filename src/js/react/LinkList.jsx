@@ -14,10 +14,15 @@ export default class LinkList extends binder(React.Component) {
         super(props);
     }
 
+    onSaveChild(id: string, child: Link) {
+        console.log('saving id ' + id);
+        console.log(child.getData());
+    }
+
     render() {
-        let links = this.props.links.map(function (link, index) {
+        let links = this.props.links.map((link, index) => {
             return (
-                <Link key={index} {...link}/>
+                <Link key={index} {...link} onSave={this.onSaveChild}/>
             );
         });
 

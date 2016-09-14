@@ -130,6 +130,7 @@ input {
   outline: none;
   border: none;
   border-radius: .3em;
+  -webkit-box-sizing: border-box;
   display: block;
   width: 100%;
 
@@ -172,6 +173,10 @@ p.error {
   font-size: 1.25em;
   background-color: red;
   padding: .25em;
+}
+
+.no-display {
+  display: none;
 }
 
 /**
@@ -411,6 +416,59 @@ p.error {
 
   &.hidden {
     display: none;
+  }
+}
+
+.link {
+  display: block;
+  width: 100%;
+  background-color: #fff;
+  border: 0 solid #555;
+  border-bottom-width: 1px;
+  margin: 1.5em 0;
+
+  .title-bar {
+    label {
+      width: 75%;
+      margin: 0;
+      input {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    label, i {
+      display: inline-block;
+    }
+
+    i {
+      width: 6%;
+      margin: 0 2%;
+      cursor: pointer;
+      font-size: 1.5em;
+    }
+  }
+
+  input {
+    margin: 1em 5%;
+    width: 90%;
+    border-radius: .25em;
+    border: 2px solid #fff;
+
+    &:hover {
+      border-color: #999;
+    }
+
+    &:read-only {
+      &:hover {
+        border-color: transparent;
+      }
+
+      -webkit-user-select: none;
+      cursor: pointer;
+      background: transparent;
+      outline: none;
+    }
   }
 }
 
