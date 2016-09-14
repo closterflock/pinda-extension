@@ -13,7 +13,7 @@ class APIRepository {
     }
 
     static getBaseUrl(): string {
-        return 'http://pinda.jamesspencemilwaukee.com';
+        return 'http://pinda.app';
     }
 
     /**
