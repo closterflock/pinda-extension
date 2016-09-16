@@ -1,9 +1,6 @@
 'use strict';
 // @flow
 
-import APIRepository from './../api/api-repository';
-import APIResponse from './../api/api-response';
-
 import React from 'react';
 import binder from 'react-class-binder';
 import SearchBar from './SearchBar.jsx';
