@@ -14,7 +14,8 @@ export default class Content extends binder(React.Component) {
         hidden: React.PropTypes.bool.isRequired,
         onSearch: React.PropTypes.func.isRequired,
         links: React.PropTypes.array.isRequired,
-        onSaveLink: React.PropTypes.func.isRequired
+        onSaveLink: React.PropTypes.func.isRequired,
+        onDeleteLink: React.PropTypes.func.isRequired
     };
 
     isHidden(): boolean {
@@ -28,7 +29,11 @@ export default class Content extends binder(React.Component) {
                     Content
                 </h1>
                 <SearchBar onSearch={this.props.onSearch}/>
-                <LinkList links={this.props.links} onSave={this.props.onSaveLink} />
+                <LinkList
+                    links={this.props.links}
+                    onSave={this.props.onSaveLink}
+                    onDelete={this.props.onDeleteLink}
+                />
             </section>
         );
     }

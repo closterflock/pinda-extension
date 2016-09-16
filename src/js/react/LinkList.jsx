@@ -8,13 +8,19 @@ import Link from './Link.jsx';
 export default class LinkList extends binder(React.Component) {
     static propTypes = {
         links: React.PropTypes.array.isRequired,
-        onSave: React.PropTypes.func.isRequired
+        onSave: React.PropTypes.func.isRequired,
+        onDelete: React.PropTypes.func.isRequired
     };
 
     render() {
         let links = this.props.links.map((link, index) => {
             return (
-                <Link key={index} {...link} onSave={this.props.onSave}/>
+                <Link
+                    key={index}
+                    {...link}
+                    onSave={this.props.onSave}
+                    onDelete={this.props.onDelete}
+                />
             );
         });
 

@@ -135,6 +135,18 @@ export default class Application extends binder(React.Component) {
         });
     }
 
+    deleteLink(id: string) {
+        APIRepository.deleteLink(id);
+
+        let links: Array<Object> = this.state.links.filter((link: Object) => {
+            return (link.id !== id);
+        });
+
+        this.setState({
+            links: links
+        });
+    }
+
     render() {
         return (
             <div className='app'>
@@ -153,6 +165,7 @@ export default class Application extends binder(React.Component) {
                     onSearch={this.onSearch}
                     links={this.state.links}
                     onSaveLink={this.updateLink}
+                    onDeleteLink={this.deleteLink}
                 />
                 <AuthForm
                     ref={this.authFormMounted}

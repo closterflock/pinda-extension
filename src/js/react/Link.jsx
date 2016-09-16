@@ -13,7 +13,8 @@ export default class Link extends binder(React.Component) {
         title: React.PropTypes.string.isRequired,
         url: React.PropTypes.string.isRequired,
         description: React.PropTypes.string,
-        onSave: React.PropTypes.func.isRequired
+        onSave: React.PropTypes.func.isRequired,
+        onDelete: React.PropTypes.func.isRequired
     };
 
     state: {
@@ -66,6 +67,11 @@ export default class Link extends binder(React.Component) {
         }
     }
 
+    deleteLink(e: Event): void {
+        e.preventDefault();
+        this.props.onDelete(this.props.id);
+    }
+
     inputMounted(component: HTMLInputElement, name: string): void {
         let key = `${name}Input`;
         var self = this;
@@ -96,6 +102,7 @@ export default class Link extends binder(React.Component) {
                         {this.renderInput('title', this.props.title, 'title')}
                     </label>
                     <i className={editButtonClass} onClick={this.toggleEditable}/>
+                    <i className="fa fa-trash" onClick={this.deleteLink} />
                 </div>
                 <label htmlFor='url'>
                     {this.renderInput('url', this.props.url)}

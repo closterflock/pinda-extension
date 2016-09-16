@@ -71,6 +71,20 @@ class APIRepository {
     }
 
     /**
+     * Deletes a link.
+     *
+     * @param linkId
+     * @returns {Promise.<APIResponse>}
+     */
+    deleteLink(linkId: string): Promise<APIResponse> {
+        let request: Request = this.prepareRequest();
+        request.setMethod('DELETE');
+        request.setUrl(this.constructor.getBaseUrl() + '/api/v1/links/' + linkId);
+
+        return request.makeRequest();
+    }
+
+    /**
      * Searches for links.
      *
      * @param term
