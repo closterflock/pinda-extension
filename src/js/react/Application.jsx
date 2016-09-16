@@ -9,7 +9,6 @@ import APIResponse from './../api/api-response';
 import AuthForm from './AuthForm.jsx';
 import ChromeStorage from './../storage/chrome-storage';
 import binder from 'react-class-binder';
-import Menu from './Menu.jsx';
 import Link from './Link.jsx';
 
 export default class Application extends binder(React.Component) {
@@ -166,16 +165,13 @@ export default class Application extends binder(React.Component) {
                     links={this.state.links}
                     onSaveLink={this.updateLink}
                     onDeleteLink={this.deleteLink}
+                    menuActive={this.state.menuActive}
+                    onLogout={this.logout}
                 />
                 <AuthForm
                     ref={this.authFormMounted}
                     onSubmit={this.attemptLogin}
                     hidden={this.isLoggedIn()}
-                />
-                <Menu
-                    ref={this.menuMounted}
-                    active={this.state.menuActive}
-                    onLogout={this.logout}
                 />
             </div>
         );

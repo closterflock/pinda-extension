@@ -5,6 +5,7 @@ import React from 'react';
 import binder from 'react-class-binder';
 import SearchBar from './SearchBar.jsx';
 import LinkList from './LinkList.jsx';
+import Menu from './Menu.jsx';
 
 export default class Content extends binder(React.Component) {
     static propTypes = {
@@ -12,7 +13,9 @@ export default class Content extends binder(React.Component) {
         onSearch: React.PropTypes.func.isRequired,
         links: React.PropTypes.array.isRequired,
         onSaveLink: React.PropTypes.func.isRequired,
-        onDeleteLink: React.PropTypes.func.isRequired
+        onDeleteLink: React.PropTypes.func.isRequired,
+        onLogout: React.PropTypes.func.isRequired,
+        menuActive: React.PropTypes.bool.isRequired
     };
 
     isHidden(): boolean {
@@ -30,6 +33,10 @@ export default class Content extends binder(React.Component) {
                     links={this.props.links}
                     onSave={this.props.onSaveLink}
                     onDelete={this.props.onDeleteLink}
+                />
+                <Menu
+                    active={this.props.menuActive}
+                    onLogout={this.props.onLogout}
                 />
             </section>
         );
