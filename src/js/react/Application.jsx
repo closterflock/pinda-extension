@@ -24,6 +24,7 @@ export default class Application extends binder(React.Component) {
         loggedIn: boolean;
         menuActive: boolean;
         links: Array<Object>;
+        newLinkActive: boolean;
     };
 
     constructor(props: Object) {
@@ -35,12 +36,15 @@ export default class Application extends binder(React.Component) {
         this.state = {
             loggedIn: props.loggedIn,
             menuActive: false,
-            links: []
+            links: [],
+            newLinkActive: false
         };
     }
 
-    onBackButton(active: boolean): void {
-
+    toggleNewLink(): void {
+        this.setState({
+            newLinkActive: !(this.state.newLinkActive)
+        });
     }
 
     onNavButton(active: boolean): void {
@@ -151,12 +155,12 @@ export default class Application extends binder(React.Component) {
             <div className='app'>
                 <Header
                     ref={this.headerMounted}
-                    onBackButton={this.onBackButton}
+                    toggleNewLink={this.toggleNewLink}
                     onNavButton={this.onNavButton}
-                    backButtonShown={false}
-                    navButtonHidden={!this.isLoggedIn()}
+                    loggedIn={this.isLoggedIn()}
                     navActive={this.state.menuActive}
                     toggleMenu={this.toggleMenu}
+                    newLinkActive={this.state.newLinkActive}
                 />
                 <Content
                     ref={this.contentMounted}

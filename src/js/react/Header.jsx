@@ -6,24 +6,38 @@ import binder from 'react-class-binder'
 
 export default class Header extends binder(React.Component) {
     static propTypes = {
-        onBackButton: React.PropTypes.func.isRequired,
+        toggleNewLink: React.PropTypes.func.isRequired,
         onNavButton: React.PropTypes.func.isRequired,
-        backButtonShown: React.PropTypes.bool.isRequired,
-        navButtonHidden: React.PropTypes.bool.isRequired,
         navActive: React.PropTypes.bool.isRequired,
-        toggleMenu: React.PropTypes.func.isRequired
+        toggleMenu: React.PropTypes.func.isRequired,
+        loggedIn: React.PropTypes.bool.isRequired,
+        newLinkActive: React.PropTypes.bool.isRequired
     };
 
-    backButtonShown(): boolean {
-        return this.props.backButtonShown;
+    newLinkShown(): boolean {
+        return this.isLoggedIn();
+    }
+
+    toggleNewLink(): void {
+        if (this.newLinkShown()) {
+            this.props.toggleNewLink();
+        }
+    }
+
+    newLinkActive(): boolean {
+        return this.props.newLinkActive;
     }
 
     navIsActive(): boolean {
         return this.props.navActive;
     }
 
+    isLoggedIn(): boolean {
+        return this.props.loggedIn;
+    }
+
     navButtonHidden(): boolean {
-        return this.props.navButtonHidden;
+        return !(this.isLoggedIn());
     }
 
     toggleMenu(): void {
@@ -38,9 +52,12 @@ export default class Header extends binder(React.Component) {
             (this.navButtonHidden() ? ' hidden' : '');
         return (
             <div className='header'>
-                <h1 className={'back-button ' + (this.backButtonShown() ? 'active' : '')}>
-                    &lt;
-                </h1>
+                <div className={'new-link-button ' + (this.newLinkShown() ? '' : 'hidden')}>
+                    <i
+                        className={'fa fa-times ' + (this.newLinkActive() ? 'active' : '')}
+                        onClick={this.toggleNewLink}
+                    />
+                </div>
                 <h1 className="header-text">
                     Pinda
                 </h1>
