@@ -26,6 +26,12 @@ export default class Header extends binder(React.Component) {
         return this.props.navButtonHidden;
     }
 
+    toggleMenu(): void {
+        if (!this.navButtonHidden()) {
+            this.props.toggleMenu();
+        }
+    }
+
     render() {
         let navClasses: string = 'nav-button' +
             (this.navIsActive() ? ' active' : '') +
@@ -38,7 +44,7 @@ export default class Header extends binder(React.Component) {
                 <h1 className="header-text">
                     Pinda
                 </h1>
-                <div className={navClasses} onClick={this.props.toggleMenu}>
+                <div className={navClasses} onClick={this.toggleMenu}>
                     <div className='icon'></div>
                 </div>
             </div>
