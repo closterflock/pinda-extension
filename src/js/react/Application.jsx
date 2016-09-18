@@ -11,6 +11,7 @@ import ChromeStorage from './../storage/chrome-storage';
 import binder from 'react-class-binder';
 import Link from './Link.jsx';
 import NewLink from './NewLink.jsx';
+import Menu from './Menu.jsx';
 import {CONTENT_COMPONENT, AUTH_COMPONENT, NEW_LINK_COMPONENT} from './component-constants';
 import type {DisplayedComponent} from './component-constants';
 
@@ -207,9 +208,7 @@ export default class Application extends binder(React.Component) {
                         links={this.state.links}
                         onSaveLink={this.updateLink}
                         onDeleteLink={this.deleteLink}
-                        onLogout={this.logout}
                         displayedComponent={this.getDisplayedComponent()}
-                        menuActive={this.state.menuActive}
                     />
                     <AuthForm
                         ref={this.authFormMounted}
@@ -220,6 +219,10 @@ export default class Application extends binder(React.Component) {
                         ref={this.newLinkMounted}
                         displayedComponent={this.getDisplayedComponent()}
                         onSubmit={this.newLink}
+                    />
+                    <Menu
+                        active={this.state.menuActive}
+                        onLogout={this.logout}
                     />
                 </section>
             </div>
