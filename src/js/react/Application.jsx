@@ -181,13 +181,13 @@ export default class Application extends binder(React.Component) {
                 />
                 <Content
                     ref={this.contentMounted}
-                    hidden={!this.isLoggedIn()}
                     onSearch={this.onSearch}
                     links={this.state.links}
                     onSaveLink={this.updateLink}
                     onDeleteLink={this.deleteLink}
-                    menuActive={this.state.menuActive}
                     onLogout={this.logout}
+                    displayedComponent={this.getDisplayedComponent()}
+                    menuActive={this.state.menuActive}
                 />
                 <AuthForm
                     ref={this.authFormMounted}

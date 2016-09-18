@@ -6,25 +6,35 @@ import binder from 'react-class-binder';
 import SearchBar from './SearchBar.jsx';
 import LinkList from './LinkList.jsx';
 import Menu from './Menu.jsx';
+import {CONTENT_COMPONENT} from './component-constants';
+import type {DisplayedComponent} from './component-constants';
 
 export default class Content extends binder(React.Component) {
     static propTypes = {
-        hidden: React.PropTypes.bool.isRequired,
         onSearch: React.PropTypes.func.isRequired,
         links: React.PropTypes.array.isRequired,
         onSaveLink: React.PropTypes.func.isRequired,
         onDeleteLink: React.PropTypes.func.isRequired,
         onLogout: React.PropTypes.func.isRequired,
+        displayedComponent: React.PropTypes.string.isRequired,
         menuActive: React.PropTypes.bool.isRequired
     };
 
-    isHidden(): boolean {
-        return this.props.hidden;
+    getDisplayedComponent(): DisplayedComponent {
+        return this.props.displayedComponent;
+    }
+
+    contentShowing(): boolean {
+        return this.getDisplayedComponent() === CONTENT_COMPONENT;
+    }
+
+    menuShowing(): boolean {
+        return this.props.menuActive;
     }
 
     render() {
         return (
-            <section className={`content ${this.isHidden() ? 'hidden' : ''}`}>
+            <section className={`content ${this.contentShowing() ? '' : 'hidden'}`}>
                 <h1>
                     Content
                 </h1>
@@ -35,7 +45,7 @@ export default class Content extends binder(React.Component) {
                     onDelete={this.props.onDeleteLink}
                 />
                 <Menu
-                    active={this.props.menuActive}
+                    active={this.menuShowing()}
                     onLogout={this.props.onLogout}
                 />
             </section>
