@@ -98,7 +98,7 @@ export default class Application extends binder(React.Component) {
         ChromeStorage.setAccessToken(response.getBody().data.token);
         this.setState({
             loggedIn: true,
-            menuActive: false
+            displayedComponent: CONTENT_COMPONENT
         });
     }
 
@@ -112,11 +112,10 @@ export default class Application extends binder(React.Component) {
 
     logout(): void {
         let self = this;
-        ChromeStorage.clearAccessToken().then(function () {
-            self.setState({
-                loggedIn: false,
-                menuActive: false
-            });
+        ChromeStorage.clearAccessToken();
+        self.setState({
+            loggedIn: false,
+            displayedComponent: AUTH_COMPONENT
         });
     }
 

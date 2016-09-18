@@ -4,13 +4,18 @@
 import React from 'react';
 import binder from 'react-class-binder'
 
-type ComponentKey = 'name' | 'email' | 'password' | 'confirmPassword';
+import {AUTH_COMPONENT, DisplayedComponent} from './component-constants';
 
 export default class AuthForm extends binder(React.Component) {
     emailInput: HTMLInputElement;
     passwordInput: HTMLInputElement;
     confirmPasswordInput: HTMLInputElement;
     nameInput: HTMLInputElement;
+
+    static propTypes = {
+        onSubmit: React.PropTypes.func.isRequired,
+        displayedComponent: React.PropTypes.string.isRequired
+    };
 
     state: {
         isRegistration: boolean;
@@ -26,10 +31,9 @@ export default class AuthForm extends binder(React.Component) {
         };
     }
 
-    static propTypes = {
-        onSubmit: React.PropTypes.func.isRequired,
-        hidden: React.PropTypes.bool.isRequired
-    };
+    isShowing(): boolean {
+        return this.props.displayedComponent === AUTH_COMPONENT;
+    }
 
     clearInputs(): void {
         this.emailInput.value = '';
@@ -151,7 +155,7 @@ export default class AuthForm extends binder(React.Component) {
         });
 
         return (
-            <form className={`auth-form ${this.props.hidden ? 'hidden' : ''}`}>
+            <form className={`auth-form ${this.isShowing() ? '' : 'hidden'}`}>
                 {errors}
                 <label htmlFor="name" className={this.getIsRegistrationClass()}>
                     Name
