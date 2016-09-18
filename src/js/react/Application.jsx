@@ -10,6 +10,7 @@ import AuthForm from './AuthForm.jsx';
 import ChromeStorage from './../storage/chrome-storage';
 import binder from 'react-class-binder';
 import Link from './Link.jsx';
+import {DisplayedComponent, CONTENT_COMPONENT, AUTH_COMPONENT} from './component-constants';
 
 export default class Application extends binder(React.Component) {
     contentComponent: Content;
@@ -25,6 +26,7 @@ export default class Application extends binder(React.Component) {
         menuActive: boolean;
         links: Array<Object>;
         newLinkActive: boolean;
+        displayedComponent: DisplayedComponent;
     };
 
     constructor(props: Object) {
@@ -37,8 +39,17 @@ export default class Application extends binder(React.Component) {
             loggedIn: props.loggedIn,
             menuActive: false,
             links: [],
-            newLinkActive: false
+            newLinkActive: false,
+            displayedComponent: props.loggedIn ? CONTENT_COMPONENT : AUTH_COMPONENT
         };
+    }
+
+    setDisplayedComponent(view: DisplayedComponent): void {
+        this.state.displayedComponent = view;
+    }
+
+    isDisplayed(view: DisplayedComponent): boolean {
+        return this.state.displayedComponent === view;
     }
 
     toggleNewLink(): void {
