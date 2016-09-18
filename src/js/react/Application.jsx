@@ -122,6 +122,7 @@ export default class Application extends binder(React.Component) {
         ChromeStorage.clearAccessToken();
         self.setState({
             loggedIn: false,
+            menuActive: false,
             displayedComponent: AUTH_COMPONENT
         });
     }
