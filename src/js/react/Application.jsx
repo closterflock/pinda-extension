@@ -10,7 +10,8 @@ import AuthForm from './AuthForm.jsx';
 import ChromeStorage from './../storage/chrome-storage';
 import binder from 'react-class-binder';
 import Link from './Link.jsx';
-import {DisplayedComponent, CONTENT_COMPONENT, AUTH_COMPONENT} from './component-constants';
+import {CONTENT_COMPONENT, AUTH_COMPONENT} from './component-constants';
+import type {DisplayedComponent} from './component-constants';
 
 export default class Application extends binder(React.Component) {
     contentComponent: Content;
