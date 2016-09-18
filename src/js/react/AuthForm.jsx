@@ -4,7 +4,7 @@
 import React from 'react';
 import binder from 'react-class-binder'
 
-import {AUTH_COMPONENT, propTypeValidator} from './component-constants';
+import {AUTH_COMPONENT} from './component-constants';
 
 type ComponentKey = 'name' | 'email' | 'password' | 'confirmPassword';
 
