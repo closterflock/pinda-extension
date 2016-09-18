@@ -3,6 +3,7 @@
 
 import React from 'react';
 import binder from 'react-class-binder'
+import {NEW_LINK_COMPONENT} from './component-constants';
 
 export default class Header extends binder(React.Component) {
     static propTypes = {
@@ -11,21 +12,21 @@ export default class Header extends binder(React.Component) {
         navActive: React.PropTypes.bool.isRequired,
         toggleMenu: React.PropTypes.func.isRequired,
         loggedIn: React.PropTypes.bool.isRequired,
-        newLinkActive: React.PropTypes.bool.isRequired
+        displayedComponent: React.PropTypes.string.isRequired
     };
 
-    newLinkShown(): boolean {
+    newLinkButtonShown(): boolean {
         return this.isLoggedIn();
     }
 
     toggleNewLink(): void {
-        if (this.newLinkShown()) {
+        if (this.newLinkButtonShown()) {
             this.props.toggleNewLink();
         }
     }
 
     newLinkActive(): boolean {
-        return this.props.newLinkActive;
+        return this.props.displayedComponent === NEW_LINK_COMPONENT;
     }
 
     navIsActive(): boolean {
@@ -52,7 +53,7 @@ export default class Header extends binder(React.Component) {
             (this.navButtonHidden() ? ' hidden' : '');
         return (
             <div className='header'>
-                <div className={'new-link-button ' + (this.newLinkShown() ? '' : 'hidden')}>
+                <div className={'new-link-button ' + (this.newLinkButtonShown() ? '' : 'hidden')}>
                     <i
                         className={'fa fa-times ' + (this.newLinkActive() ? 'active' : '')}
                         onClick={this.toggleNewLink}

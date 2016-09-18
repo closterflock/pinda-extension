@@ -10,7 +10,7 @@ import AuthForm from './AuthForm.jsx';
 import ChromeStorage from './../storage/chrome-storage';
 import binder from 'react-class-binder';
 import Link from './Link.jsx';
-import {CONTENT_COMPONENT, AUTH_COMPONENT} from './component-constants';
+import {CONTENT_COMPONENT, AUTH_COMPONENT, NEW_LINK_COMPONENT} from './component-constants';
 import type {DisplayedComponent} from './component-constants';
 
 export default class Application extends binder(React.Component) {
@@ -59,10 +59,16 @@ export default class Application extends binder(React.Component) {
         return this.getDisplayedComponent() === view;
     }
 
+    toggleDisplay(view: DisplayedComponent): boolean {
+        if (this.isDisplayed(view)) {
+            this.setDisplayedComponent(CONTENT_COMPONENT);
+        } else {
+            this.setDisplayedComponent(view);
+        }
+    }
+
     toggleNewLink(): void {
-        this.setState({
-            newLinkActive: !(this.state.newLinkActive)
-        });
+        this.toggleDisplay(NEW_LINK_COMPONENT);
     }
 
     onNavButton(active: boolean): void {
@@ -177,7 +183,7 @@ export default class Application extends binder(React.Component) {
                     loggedIn={this.isLoggedIn()}
                     navActive={this.state.menuActive}
                     toggleMenu={this.toggleMenu}
-                    newLinkActive={this.state.newLinkActive}
+                    displayedComponent={this.getDisplayedComponent()}
                 />
                 <Content
                     ref={this.contentMounted}
