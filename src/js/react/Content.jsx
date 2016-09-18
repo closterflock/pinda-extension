@@ -6,7 +6,6 @@ import binder from 'react-class-binder';
 import SearchBar from './SearchBar.jsx';
 import LinkList from './LinkList.jsx';
 import Menu from './Menu.jsx';
-import NewLink from './NewLink.jsx';
 import {CONTENT_COMPONENT} from './component-constants';
 import type {DisplayedComponent} from './component-constants';
 
@@ -35,7 +34,7 @@ export default class Content extends binder(React.Component) {
 
     render() {
         return (
-            <section className={`content ${this.contentShowing() ? '' : 'hidden'}`}>
+            <div className={`content ${this.contentShowing() ? '' : 'hidden'}`}>
                 <h1>
                     Content
                 </h1>
@@ -49,10 +48,7 @@ export default class Content extends binder(React.Component) {
                     active={this.menuShowing()}
                     onLogout={this.props.onLogout}
                 />
-                <NewLink
-                    displayedComponent={this.props.displayedComponent}
-                />
-            </section>
+            </div>
         );
     }
 }

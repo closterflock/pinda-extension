@@ -384,13 +384,13 @@ p.error {
   }
 }
 
-.content {
+.main {
   position: relative;
   margin: 1em;
+}
 
-  &.hidden {
-    display: none;
-  }
+.content.hidden {
+  display: none;
 }
 
 .menu {

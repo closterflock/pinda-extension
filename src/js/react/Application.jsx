@@ -10,6 +10,7 @@ import AuthForm from './AuthForm.jsx';
 import ChromeStorage from './../storage/chrome-storage';
 import binder from 'react-class-binder';
 import Link from './Link.jsx';
+import NewLink from './NewLink.jsx';
 import {CONTENT_COMPONENT, AUTH_COMPONENT, NEW_LINK_COMPONENT} from './component-constants';
 import type {DisplayedComponent} from './component-constants';
 
@@ -52,6 +53,8 @@ export default class Application extends binder(React.Component) {
     setDisplayedComponent(view: DisplayedComponent): void {
         this.setState({
             displayedComponent: view
+        }, () => {
+            console.log(this.state.displayedComponent);
         });
     }
 
@@ -186,21 +189,26 @@ export default class Application extends binder(React.Component) {
                     toggleMenu={this.toggleMenu}
                     displayedComponent={this.getDisplayedComponent()}
                 />
-                <Content
-                    ref={this.contentMounted}
-                    onSearch={this.onSearch}
-                    links={this.state.links}
-                    onSaveLink={this.updateLink}
-                    onDeleteLink={this.deleteLink}
-                    onLogout={this.logout}
-                    displayedComponent={this.getDisplayedComponent()}
-                    menuActive={this.state.menuActive}
-                />
-                <AuthForm
-                    ref={this.authFormMounted}
-                    onSubmit={this.attemptLogin}
-                    displayedComponent={this.getDisplayedComponent()}
-                />
+                <section className="main">
+                    <Content
+                        ref={this.contentMounted}
+                        onSearch={this.onSearch}
+                        links={this.state.links}
+                        onSaveLink={this.updateLink}
+                        onDeleteLink={this.deleteLink}
+                        onLogout={this.logout}
+                        displayedComponent={this.getDisplayedComponent()}
+                        menuActive={this.state.menuActive}
+                    />
+                    <AuthForm
+                        ref={this.authFormMounted}
+                        onSubmit={this.attemptLogin}
+                        displayedComponent={this.getDisplayedComponent()}
+                    />
+                    <NewLink
+                        displayedComponent={this.getDisplayedComponent()}
+                    />
+                </section>
             </div>
         );
     }
