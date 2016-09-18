@@ -44,12 +44,18 @@ export default class Application extends binder(React.Component) {
         };
     }
 
+    getDisplayedComponent(): DisplayedComponent {
+        return this.state.displayedComponent;
+    }
+
     setDisplayedComponent(view: DisplayedComponent): void {
-        this.state.displayedComponent = view;
+        this.setState({
+            displayedComponent: view
+        });
     }
 
     isDisplayed(view: DisplayedComponent): boolean {
-        return this.state.displayedComponent === view;
+        return this.getDisplayedComponent() === view;
     }
 
     toggleNewLink(): void {
@@ -186,7 +192,7 @@ export default class Application extends binder(React.Component) {
                 <AuthForm
                     ref={this.authFormMounted}
                     onSubmit={this.attemptLogin}
-                    hidden={this.isLoggedIn()}
+                    displayedComponent={this.getDisplayedComponent()}
                 />
             </div>
         );
