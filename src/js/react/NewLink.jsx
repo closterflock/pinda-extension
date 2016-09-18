@@ -10,7 +10,8 @@ export default class NewLink extends binder(React.Component) {
     descriptionInput: HTMLInputElement;
     urlInput: HTMLInputElement;
     
-    submit(): void {
+    submit(e: Event): void {
+        e.preventDefault();
         console.log(this.titleInput.value);
         console.log(this.descriptionInput.value);
         console.log(this.urlInput.value);
