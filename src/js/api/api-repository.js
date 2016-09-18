@@ -41,6 +41,19 @@ class APIRepository {
         this.token = token;
     }
 
+    newLink(title: string, description: string, url: string): Promise<APIResponse> {
+        let request: Request = this.prepareRequest();
+        request.setMethod('POST');
+        request.setUrl(this.constructor.getBaseUrl() + '/api/v1/links/new');
+        request.setParams({
+            title: title,
+            description: description,
+            url: url
+        });
+
+        return request.makeRequest();
+    }
+
     /**
      * Retrieves tags from the API.
      *

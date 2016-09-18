@@ -18,6 +18,7 @@ export default class Application extends binder(React.Component) {
     contentComponent: Content;
     authFormComponent: AuthForm;
     headerComponent: Header;
+    newLinkComponent: NewLink;
 
     static propTypes = {
         loggedIn: React.PropTypes.bool
@@ -90,6 +91,10 @@ export default class Application extends binder(React.Component) {
         this.headerComponent = header;
     }
 
+    newLinkMounted(newLink: NewLink): void {
+        this.newLinkComponent = newLink;
+    }
+
     attemptLogin(email: string, password: string, register: boolean = false, name: string = '') {
         let promise: ?Promise<APIResponse> = null;
         if (register) {
@@ -128,6 +133,12 @@ export default class Application extends binder(React.Component) {
             menuActive: false,
             displayedComponent: AUTH_COMPONENT
         });
+    }
+
+    newLink(title, description, url): void {
+        APIRepository.newLink(title, description, url);
+        this.newLinkComponent.clearInputs();
+        this.setDisplayedComponent(CONTENT_COMPONENT);
     }
 
     toggleMenu(): void {
@@ -206,7 +217,9 @@ export default class Application extends binder(React.Component) {
                         displayedComponent={this.getDisplayedComponent()}
                     />
                     <NewLink
+                        ref={this.newLinkMounted}
                         displayedComponent={this.getDisplayedComponent()}
+                        onSubmit={this.newLink}
                     />
                 </section>
             </div>

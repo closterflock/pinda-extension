@@ -9,12 +9,28 @@ export default class NewLink extends binder(React.Component) {
     titleInput: HTMLInputElement;
     descriptionInput: HTMLInputElement;
     urlInput: HTMLInputElement;
+
+    static propTypes = {
+        displayedComponent: React.PropTypes.string.isRequired,
+        onSubmit: React.PropTypes.func.isRequired
+    };
     
     submit(e: Event): void {
         e.preventDefault();
         console.log(this.titleInput.value);
         console.log(this.descriptionInput.value);
         console.log(this.urlInput.value);
+        this.props.onSubmit(
+            this.titleInput.value,
+            this.descriptionInput.value,
+            this.urlInput.value
+        );
+    }
+
+    clearInputs(): void {
+        this.titleInput.value = '';
+        this.descriptionInput.value = '';
+        this.urlInput.value = '';
     }
 
     inputRef(input: HTMLInputElement, name: string): void {
