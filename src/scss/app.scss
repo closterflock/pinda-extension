@@ -345,6 +345,8 @@ p.error {
 /**
  * New components - React
  */
+
+
 .header {
 
   padding-bottom: .5em;
@@ -483,6 +485,12 @@ p.error {
       background: transparent;
       outline: none;
     }
+  }
+}
+
+.new-link-form {
+  &.hidden {
+    display: none;
   }
 }
 
