@@ -64,7 +64,7 @@ export default class Application extends binder(React.Component) {
         return this.getDisplayedComponent() === view;
     }
 
-    toggleDisplay(view: DisplayedComponent): boolean {
+    toggleDisplay(view: DisplayedComponent): void {
         if (this.isDisplayed(view)) {
             this.setDisplayedComponent(CONTENT_COMPONENT);
         } else {
@@ -136,7 +136,7 @@ export default class Application extends binder(React.Component) {
         });
     }
 
-    newLink(title, description, url): void {
+    newLink(title: string, description: string, url: string): void {
         APIRepository.newLink(title, description, url);
         this.newLinkComponent.clearInputs();
         this.setDisplayedComponent(CONTENT_COMPONENT);
