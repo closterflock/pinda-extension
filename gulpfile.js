@@ -26,8 +26,10 @@ gulp.task('start', function () {
 
 gulp.task('copy', function () {
     output.log('Copying all those top-level files');
-    gulp.src(paths.src.files, { cwd: paths.src })
-        .pipe(gulp.dest(paths.dest.dir));
+    paths.files.forEach(function (path) {
+        gulp.src(path.src)
+            .pipe(gulp.dest(path.dest));
+    });
 });
 
 gulp.task('bundle', function (done) {

@@ -5,6 +5,7 @@ module.exports = {
         'react', 'es2015'
     ],
     plugins: [
-        'transform-flow-strip-types'
+        'transform-flow-strip-types',
+        'transform-class-properties'
     ]
 };

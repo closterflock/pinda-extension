@@ -3,7 +3,6 @@
 module.exports = {
     src: {
         dir: './src/',
-        files: ['./src/*.*', './src/**/*.ttf', './src/**/*.png'],
         js: './src/js/*.js',
         scss: './src/scss/*.*'
     },
@@ -16,5 +15,15 @@ module.exports = {
         dir: './dest/',
         js: './dest/js/',
         css: './dest/css/'
-    }
+    },
+    files: [
+        {
+            src: './src/*.*',
+            dest: './dest/'
+        },
+        {
+            src: './src/fonts/**/*.*',
+            dest: './dest/fonts/'
+        }
+    ]
 };

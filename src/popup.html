@@ -6,16 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
-    <auth-form v-ref:auth-form v-show="!loggedIn" :on-submit="attemptLogin"></auth-form>
-    <div class="logged-in" v-show="loggedIn">
-        <nav-menu :on-logout="onLogout"></nav-menu>
-        <search-bar v-ref:search-bar :on-term-change="onTermChange" v-show="!linkForm"></search-bar>
-        <result-list v-ref:result-list :links="links" :on-clicked-tag="onClickedTag" v-show="!linkForm"></result-list>
-        <button class="new-link" v-on:click.prevent="newLink" v-show="!linkForm">
-            +
-        </button>
-        <new-link v-show="linkForm" :on-submit="onSubmit" :tags="tags"></new-link>
-    </div>
+    <section class="popup"></section>
     <script src="js/popup.js"></script>
 </body>
 </html>

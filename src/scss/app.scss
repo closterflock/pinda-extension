@@ -1,3 +1,5 @@
+@import 'font-awesome/font-awesome';
+
 /**
 *Settings
  */
@@ -6,7 +8,7 @@ $bannerBackgroundColor: #304964;
 $bannerFontColor: #f6b108;
 $mainFont: 'Raleway', sans-serif;
 $accentColor: #d57f00;
-$hamburgerMenuColor: #000;
+$headerItemColor: #000;
 
 /**
 *Tools
@@ -85,7 +87,12 @@ html {
 
 body {
   margin: 10px;
-  width: 200px;
+  width: 300px;
+  min-height: 100px;
+}
+
+h1 {
+  margin: 0;
 }
 
 /**
@@ -123,6 +130,7 @@ input {
   outline: none;
   border: none;
   border-radius: .3em;
+  -webkit-box-sizing: border-box;
   display: block;
   width: 100%;
 
@@ -160,6 +168,17 @@ form {
   }
 }
 
+p.error {
+  color: white;
+  font-size: 1.25em;
+  background-color: red;
+  padding: .25em;
+}
+
+.no-display {
+  display: none;
+}
+
 /**
 *Objects
  */
@@ -173,18 +192,24 @@ form {
 *Components
  */
 
-.hamburger-wrapper {
+.nav-button {
   cursor: pointer;
-  margin-top: 1.3em;
-  margin-right: .75em;
+  margin-top: .9em;
   float: right;
   position: relative;
   display: inline-block;
-  min-width: 10%;
+  width: 10%;
   height: 1.67em;
   z-index: 1000;
+  user-select: none;
+  transition: opacity .3s ease, background-color .3s ease;
 
-  .hamburger {
+  &.hidden {
+    opacity: 0;
+    cursor: default;
+  }
+
+  .icon {
     transition: background .3s ease;
     position: absolute;
     top: 50%;
@@ -192,7 +217,7 @@ form {
     width: 100%;
     height: 2px;
 
-    background-color: $hamburgerMenuColor;
+    background-color: $headerItemColor;
 
     &:before, &:after {
       transition: all .3s ease;
@@ -201,7 +226,7 @@ form {
       height: 2px;
       position: absolute;
       left: 0;
-      background-color: $hamburgerMenuColor;
+      background-color: $headerItemColor;
     }
 
     &:before {
@@ -215,20 +240,21 @@ form {
 
 
   &.active {
-    .hamburger {
+    .icon {
       background: transparent;
 
       &:before, &:after {
         top: 0;
         bottom: 0;
+        background-color: $accentColor;
       }
 
       &:before {
-        transform: rotate(-225deg);
+        transform: rotate(-135deg);
       }
 
       &:after {
-        transform: rotate(225deg);
+        transform: rotate(135deg);
       }
     }
   }
@@ -243,18 +269,6 @@ form {
   bottom: 0;
   z-index: 999;
   background-color: $backgroundColor;
-
-  .nav {
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-
-    .item {
-      margin: 0.6em 0;
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-  }
 }
 
 #search-header {
@@ -327,6 +341,162 @@ form {
   width: 25%;
   font-size: 2em;
   padding: .25em;
+}
+
+/**
+ * New components - React
+ */
+
+
+.header {
+
+  padding-bottom: .5em;
+  border-bottom: 1px solid #555;
+
+  .new-link-button {
+    width: 10%;
+    text-align: center;
+    display: inline-block;
+    visibility: visible;
+
+    .icon {
+      color: $headerItemColor;
+      text-align: center;
+      margin: 0;
+      cursor: pointer;
+      user-select: none;
+      font-size :2.5em;
+      transition: transform .4s ease, color .4s ease;
+      transform: rotate(0deg);
+
+      &.active {
+        color: $accentColor;
+        transform: rotate(135deg);
+      }
+    }
+
+    &.hidden {
+      cursor: default;
+      visibility: hidden;
+    }
+  }
+  .header-text {
+    width: 80%;
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.main {
+  position: relative;
+  margin: 1em;
+}
+
+.content.hidden {
+  display: none;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $backgroundColor;
+  opacity: 0;
+  display: none;
+  z-index: -99999;
+  transition: opacity .4s ease;
+
+  &.active {
+    display: block;
+    opacity: 1;
+    z-index: auto;
+  }
+
+  .nav {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+
+    .item {
+      margin: 0.6em 0;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+  }
+}
+
+.auth-form {
+  label {
+    display: block;
+    &.hidden {
+      display: none;
+    }
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.link {
+  display: block;
+  width: 100%;
+  background-color: #fff;
+  border: 0 solid #555;
+  border-bottom-width: 1px;
+  margin: 1.5em 0;
+
+  .title-bar {
+    margin: .55em 5%;
+    label {
+      margin: 0;
+      width: 75%;
+      input {
+        margin: 0;
+      }
+    }
+
+    label, i {
+      display: inline-block;
+    }
+
+    i {
+      width: 6%;
+      margin: 0 2%;
+      cursor: pointer;
+      font-size: 1.5em;
+    }
+  }
+
+  input {
+    margin: 1em 5%;
+    width: 90%;
+    border-radius: .25em;
+    border: 2px solid #fff;
+
+    &:hover {
+      border-color: #999;
+    }
+
+    &:read-only {
+      &:hover {
+        border-color: transparent;
+      }
+
+      -webkit-user-select: none;
+      cursor: pointer;
+      background: transparent;
+      outline: none;
+    }
+  }
+}
+
+.new-link-form {
+  &.hidden {
+    display: none;
+  }
 }
 
 /**
