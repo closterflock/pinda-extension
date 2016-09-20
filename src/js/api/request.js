@@ -8,8 +8,8 @@ type Options = {
     url: string;
     method: string;
     headers: Object;
+    qs: Object;
     json?: boolean;
-    form?: Object;
 }
 
 type Method = 'GET' | 'POST' | 'PUT' | 'DELETE';
@@ -153,32 +153,17 @@ export default class Request {
 
     /**
      * Prepares the option object to pass to the request library.
+     *
+     * @returns Options
      */
     prepareOptions(): Options {
-
-        var options: Options = {
+        return {
             url: this.url,
             method: this.method,
-            headers: this.headers
+            headers: this.headers,
+            qs: this.params,
+            json: true
         };
-
-        for (var key in this.headers) {
-            if (this.headers.hasOwnProperty(key)) {
-                var value = this.headers[key];
-                if (key === 'Content-Type' && value === 'application/x-www-form-urlencoded') {
-                    options.form = this.params;
-                    break;
-                }
-            }
-        }
-
-        if (typeof options.form === 'undefined') {
-            options.form = this.params;
-        }
-
-        options.json = true;
-
-        return options;
     };
 
     /**
