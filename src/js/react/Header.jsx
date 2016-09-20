@@ -55,7 +55,7 @@ export default class Header extends binder(React.Component) {
             <div className='header'>
                 <div className={'new-link-button ' + (this.newLinkButtonShown() ? '' : 'hidden')}>
                     <i
-                        className={'fa fa-times ' + (this.newLinkActive() ? 'active' : '')}
+                        className={'icon fa fa-plus-circle ' + (this.newLinkActive() ? 'active' : '')}
                         onClick={this.toggleNewLink}
                     />
                 </div>
