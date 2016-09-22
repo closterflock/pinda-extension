@@ -59,7 +59,7 @@ export default class Header extends binder(React.Component) {
                         onClick={this.toggleNewLink}
                     />
                 </div>
-                <h1 className="header-text">
+                <h1 className={`header-text ${this.isLoggedIn() ? '' : 'alternate'}`}>
                     Pinda
                 </h1>
                 <div className={navClasses} onClick={this.toggleMenu}>

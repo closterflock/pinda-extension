@@ -120,6 +120,8 @@ label {
 }
 
 input {
+  background-color: #bbb;
+  color: #fff;
   font-size: 1.125em;
   padding: .45em .45em;
   outline: none;
@@ -249,12 +251,6 @@ p.error {
   width: 50%;
 }
 
-.search-bar {
-  input {
-    background-color: #bbb;
-  }
-}
-
 .result-list {
 
   .results {
@@ -348,6 +344,10 @@ p.error {
     width: 80%;
     display: inline-block;
     text-align: center;
+
+    &.alternate {
+      color: $accentColor;
+    }
   }
 }
 
