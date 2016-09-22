@@ -110,8 +110,10 @@ export default class Application extends binder(React.Component) {
     }
 
     loginSuccess(response: APIResponse) {
+        let token: string = response.getBody().data.token;
         this.authFormComponent.clearInputs();
-        ChromeStorage.setAccessToken(response.getBody().data.token);
+        ChromeStorage.setAccessToken(token);
+        APIRepository.setAuthToken(token);
         this.setState({
             loggedIn: true,
             displayedComponent: CONTENT_COMPONENT
@@ -129,6 +131,7 @@ export default class Application extends binder(React.Component) {
     logout(): void {
         let self = this;
         ChromeStorage.clearAccessToken();
+        APIRepository.clearAuthToken();
         self.setState({
             loggedIn: false,
             menuActive: false,

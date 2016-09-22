@@ -37,6 +37,10 @@ class APIRepository {
         });
     }
 
+    clearAuthToken(): void {
+        this.setAuthToken("");
+    }
+
     setAuthToken(token: string): void {
         this.token = token;
     }
