@@ -27,7 +27,9 @@ export default class SearchBar extends binder(React.Component) {
 
     render() {
         return (
-            <input type="text" ref={this.bindSearchInput} onChange={this.onTermChange}/>
+            <div className="search-bar">
+                <input type="text" ref={this.bindSearchInput} onChange={this.onTermChange}/>
+            </div>
         );
     }
 }
