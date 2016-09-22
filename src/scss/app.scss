@@ -392,8 +392,10 @@ p.error {
   margin: 1em;
 }
 
-.content.hidden {
-  display: none;
+.content {
+  &.hidden {
+    display: none;
+  }
 }
 
 .menu {
@@ -404,12 +406,11 @@ p.error {
   bottom: 0;
   background-color: $backgroundColor;
   opacity: 0;
-  display: none;
-  z-index: -99999;
+  visibility: hidden;
   transition: opacity .4s ease;
 
   &.active {
-    display: block;
+    visibility: visible;
     opacity: 1;
     z-index: auto;
   }
