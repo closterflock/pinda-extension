@@ -4,11 +4,12 @@
 *Settings
  */
 $backgroundColor: #e6e6e6;
-$bannerBackgroundColor: #304964;
-$bannerFontColor: #f6b108;
 $mainFont: 'Raleway', sans-serif;
+$lightAccentColor: #f6b108;
 $accentColor: #d57f00;
-$headerItemColor: #000;
+$lightComplementaryColor: #2763A1;
+$complementaryColor: #03264E;
+$headerItemColor: $lightAccentColor;
 
 /**
 *Tools
@@ -105,16 +106,6 @@ h1, h2, h3 {
 
 h1 {
   font-size: 2em;
-}
-
-header {
-  background-color: $bannerBackgroundColor;
-  color: $bannerFontColor;
-
-  h1 {
-    padding: .625em 0;
-    margin: 0;
-  }
 }
 
 label {
@@ -256,7 +247,7 @@ p.error {
 
 .search-bar {
   input {
-    font-size: 1.5em;
+    background-color: #bbb;
   }
 }
 
@@ -319,7 +310,7 @@ p.error {
 .header {
 
   padding-bottom: .5em;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid $complementaryColor;
 
   .new-link-button {
     width: 10%;
@@ -349,6 +340,7 @@ p.error {
     }
   }
   .header-text {
+    color: $complementaryColor;
     width: 80%;
     display: inline-block;
     text-align: center;
