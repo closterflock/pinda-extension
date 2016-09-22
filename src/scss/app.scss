@@ -183,11 +183,6 @@ p.error {
 *Objects
  */
 
-.margin {
-  width: 85%;
-  padding: 0 7.5%;
-}
-
 /**
 *Components
  */
@@ -258,17 +253,6 @@ p.error {
       }
     }
   }
-}
-
-.hamburger-nav {
-  transition: opacity .4s ease;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999;
-  background-color: $backgroundColor;
 }
 
 #search-header {
@@ -342,11 +326,6 @@ p.error {
   font-size: 2em;
   padding: .25em;
 }
-
-/**
- * New components - React
- */
-
 
 .header {
 
