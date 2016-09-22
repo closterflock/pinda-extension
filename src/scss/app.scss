@@ -383,6 +383,9 @@ span.checkbox {
 }
 
 .content {
+  h1 {
+    margin-bottom: .35em;
+  }
   &.hidden {
     display: none;
   }
