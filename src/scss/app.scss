@@ -111,13 +111,17 @@ h1 {
 label {
   margin: .55em 0;
   display: block;
-  font-size: 1.125em;
+  font-size: 1.25em;
   cursor: pointer;
+
+  input {
+    margin-top: .75em;
+  }
 }
 
 input {
   font-size: 1.125em;
-  padding: .25em .45em;
+  padding: .45em .45em;
   outline: none;
   border: none;
   border-radius: .3em;
