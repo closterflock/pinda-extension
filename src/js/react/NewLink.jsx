@@ -47,9 +47,9 @@ export default class NewLink extends binder(React.Component) {
     render() {
         return (
             <form className={`new-link-form ${this.isDisplayed() ? '' : 'hidden'}`} onSubmit={this.submit}>
-                <h2>
+                <h1>
                     New Link
-                </h2>
+                </h1>
                 <label>
                     Title
                     <input type="text" name="title" ref={(i) => this.inputRef(i, 'title')}/>

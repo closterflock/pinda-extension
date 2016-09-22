@@ -33,7 +33,7 @@ export default class Content extends binder(React.Component) {
         return (
             <div className={`content ${this.contentShowing() ? '' : 'hidden'}`}>
                 <h1>
-                    Content
+                    Search
                 </h1>
                 <SearchBar onSearch={this.props.onSearch}/>
                 <LinkList

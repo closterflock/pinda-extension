@@ -173,6 +173,7 @@ export default class AuthForm extends binder(React.Component) {
                 </label>
                 <label htmlFor="register">
                     Register
+                    <span className={`register checkbox ${this.isRegistration() ? 'checked': ''}`}/>
                     <input type="checkbox" id="register" name="register" checked={this.isRegistration()} onChange={this.toggleRegistration}/>
                 </label>
                 <label htmlFor="confirmPassword" className={this.getIsRegistrationClass()}>
