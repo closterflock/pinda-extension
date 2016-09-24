@@ -81,7 +81,6 @@ export default class Link extends binder(React.Component) {
     renderInput(name: string, value: string, classes: ?string): React.Element<any> {
         return (
             <input
-                id={name}
                 name={name}
                 className={classes}
                 type='text'
@@ -105,10 +104,10 @@ export default class Link extends binder(React.Component) {
                     <i className="fa fa-trash" onClick={this.deleteLink} />
                 </div>
                 <label htmlFor='url'>
-                    {this.renderInput('url', this.props.url)}
+                    {this.renderInput('url', this.props.url, 'url')}
                 </label>
                 <label htmlFor='description'>
-                    {this.renderInput('description', this.props.description)}
+                    {this.renderInput('description', this.props.description, 'description')}
                 </label>
                 <button className={this.isEditable() ? '' : 'no-display'} onClick={this.save}>
                     Save
