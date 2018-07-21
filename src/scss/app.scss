@@ -24,7 +24,6 @@ $headerItemColor: $lightAccentColor;
 }
 
 @mixin hoverOpacity {
-  transition: opacity .4s ease;
 
   &:hover {
     opacity: .75;
@@ -95,7 +94,7 @@ html {
 }
 
 body {
-  margin: 10px;
+  margin: 1em;
   width: 300px;
   min-height: 100px;
 }
@@ -157,6 +156,7 @@ button {
   font-size: 1em;
   margin: .75em auto;
   cursor: pointer;
+  transition: opacity .4s ease;
 
   @include hoverOpacity();
 }
@@ -190,7 +190,7 @@ span.checkbox {
   height: 1em;
   border-radius: .5em;
   margin-left: .5em;
-  background-color: $lightComplementaryColor;
+  background-color: $lightAccentColor;
   display: inline-block;
   margin-bottom: -.15em;
 
@@ -205,7 +205,7 @@ span.checkbox {
 
   &.checked {
     &:after {
-      background-color: #49B290;
+      background-color: #fff;
     }
   }
 }
@@ -287,38 +287,6 @@ span.checkbox {
   width: 50%;
 }
 
-.result-list {
-
-  .results {
-    padding: 0;
-  }
-
-  .result {
-    padding: .5em;
-    border: 1px solid #777;
-    border-radius: 1em;
-    margin: .5em 0;
-
-    .title {
-      margin: 0 0 .5em;
-
-      a {
-        color: $accentColor;
-        font-weight: bold;
-
-        &:hover {
-          opacity: 0.7;
-        }
-      }
-    }
-
-    .description {
-      margin-top: 0;
-    }
-
-  }
-}
-
 .tag-list {
   display: flex;
   flex-flow: row wrap;
@@ -344,7 +312,7 @@ span.checkbox {
 }
 
 .header {
-  padding-bottom: .5em;
+  padding-bottom: 1em;
   border-bottom: 1px solid $complementaryColor;
 
   .new-link-button {
@@ -379,7 +347,7 @@ span.checkbox {
     }
   }
   .header-text {
-    color: $complementaryColor;
+    color: $accentColor;
     width: 80%;
     display: inline-block;
     text-align: center;
@@ -459,13 +427,12 @@ span.checkbox {
   margin: 1.5em 0;
 
   .title-bar {
-    color: $lightComplementaryColor;
     margin: .55em 0;
     label {
       margin: 0;
       width: 78%;
       input {
-        color: $lightComplementaryColor;
+        color: $lightAccentColor;
       }
     }
 
@@ -475,11 +442,11 @@ span.checkbox {
 
     i {
       -webkit-user-select: none;
-      transition: color .3s ease;
       width: 6%;
       margin: 0 2%;
       cursor: pointer;
       font-size: 1.5em;
+      transition: opacity .4s ease, color .4s ease;
 
       @include hoverOpacity();
 
@@ -489,15 +456,24 @@ span.checkbox {
     }
   }
 
+  .url {
+    font-size: .9em;
+    color: $lightComplementaryColor;
+  }
+
+  .description {
+    font-size: .8em;
+  }
+
   input {
     display: inline-block;
     color: #000;
-    margin: .2em 2%;
+    margin: 0;
     width: 70%;
     border-radius: .25em;
     border: 2px solid transparent;
     background: transparent;
-    padding: 0 .45em;
+    padding: 0 8px;
 
     &:hover {
       border-color: #999;
