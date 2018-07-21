@@ -13,10 +13,10 @@ export default class LinkList extends binder(React.Component) {
     };
 
     render() {
-        let links = this.props.links.map((link, index) => {
+        let links = this.props.links.map((link) => {
             return (
                 <Link
-                    key={index}
+                    key={link.id}
                     {...link}
                     onSave={this.props.onSave}
                     onDelete={this.props.onDelete}
