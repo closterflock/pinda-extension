@@ -13,7 +13,7 @@ class APIRepository {
     }
 
     static getBaseUrl(): string {
-        return 'http://pinda.app';
+        return 'http://pinda.test';
     }
 
     /**
@@ -156,6 +156,20 @@ class APIRepository {
             email: email,
             password: password
         });
+
+        return request.makeRequest();
+    }
+
+    sync(timestamp?: string): Promise<APIResponse> {
+        let request: Request = this.prepareRequest();
+
+        request.setMethod('GET');
+        request.setUrl(this.constructor.getBaseUrl() + '/api/v1/sync');
+        if (typeof timestamp === 'string') {
+            request.setParams({
+                timestamp: timestamp
+            });
+        }
 
         return request.makeRequest();
     }
