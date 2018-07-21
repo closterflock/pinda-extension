@@ -1,13 +1,22 @@
 'use strict';
 // @flow
 
+type TokenAndTimestamp = {
+    token?: string,
+    timestamp?: string
+};
+
 class ChromeStorage {
     _storage: any;
     _accessTokenKey: string;
+    _lastSyncedTimestamp: string;
+    _cachedDataKey: string;
 
     constructor() {
         this._storage = chrome.storage.local;
         this._accessTokenKey = 'accessToken';
+        this._lastSyncedTimestamp = 'lastSynced';
+        this._cachedDataKey = 'cachedData';
     }
 
     /**
@@ -92,6 +101,27 @@ class ChromeStorage {
     };
 
     /**
+     * Retrieves the last synced timestamp from storage.
+     *
+     * @returns {Promise}
+     */
+    getLastSyncedTimestamp(): Promise<string> {
+        return this.get(this._lastSyncedTimestamp);
+    }
+
+    setLastSyncedTimestamp(timestamp: string): Promise<*> {
+        return this.set(this._lastSyncedTimestamp, timestamp);
+    }
+
+    getCachedData(): Promise<string> {
+        return this.get(this._cachedDataKey);
+    }
+
+    setCachedData(cachedData: string): Promise<*> {
+        return this.set(this._cachedDataKey, cachedData);
+    }
+
+    /**
      * Sets the access token.
      *
      * @param value
@@ -110,5 +140,7 @@ class ChromeStorage {
         return this.remove(this._accessTokenKey);
     };
 }
+
+export type {TokenAndTimestamp};
 
 export default new ChromeStorage();
