@@ -6,7 +6,8 @@ type ResponseStatus = 'error' | 'success';
 type ResponseBody = {
     status: ResponseStatus,
     message: string,
-    data: Object
+    data?: Object,
+    errors?: Object
 };
 
 export default class APIResponse {
