@@ -163,13 +163,14 @@ export default class Application extends binder(React.Component) {
             });
         }
 
+        term = term.toLowerCase();
         DataStore.getCachedData().then(function (cachedData: CachedData) {
             console.log('cachedData', cachedData);
             var linkObj: Object = cachedData.links;
             let links = window.Object.values(linkObj).filter(function (link: Object) {
-                return link.title.indexOf(term) > -1 ||
-                    link.description.indexOf(term) > -1 ||
-                    link.url.indexOf(term) > -1;
+                return (typeof link.title === 'string' && link.title.toLowerCase().indexOf(term) > -1) ||
+                    (typeof link.description === 'string' && link.description.toLowerCase().indexOf(term) > -1) ||
+                    link.url.toLowerCase().indexOf(term) > -1;
             });
             console.log('newLinks', links);
             self.setState({
