@@ -96,10 +96,13 @@ class DataStore {
                         tags: {}
                     };
                 }
+
+                return cachedData;
                 //TODO combine new sync data into existing data set
                 //TODO do we have to worry about it not being set initially?
                 //TODO not worry about it currently
             }).then(function (cachedData: CachedData) {
+                console.log('cachedData', cachedData);
                 deletedLinks.forEach(function (deletedLink: Link) {
                     delete cachedData.links[deletedLink.id];
                 });
