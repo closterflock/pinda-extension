@@ -4,6 +4,8 @@
 import React from 'react';
 import Header from './Header.jsx';
 import Content from './Content.jsx';
+import DataStore from './../storage/data-store';
+import type {CachedData} from './../storage/data-store';
 import APIRepository from './../api/api-repository';
 import APIResponse from './../api/api-response';
 import AuthForm from './AuthForm.jsx';
@@ -154,12 +156,32 @@ export default class Application extends binder(React.Component) {
 
     onSearch(term: string) {
         var self = this;
-        APIRepository.search(term).then(function (response: APIResponse) {
-            let data: Array<Object> = response.getData().links;
+
+        if (term.length < 1) {
+            return self.setState({
+                links: []
+            });
+        }
+
+        DataStore.getCachedData().then(function (cachedData: CachedData) {
+            console.log('cachedData', cachedData);
+            var linkObj: Object = cachedData.links;
+            let links = window.Object.values(linkObj).filter(function (link: Object) {
+                return link.title.indexOf(term) > -1 ||
+                    link.description.indexOf(term) > -1 ||
+                    link.url.indexOf(term) > -1;
+            });
+            console.log('newLinks', links);
             self.setState({
-                links: data
+                links: links
             });
         });
+        // APIRepository.search(term).then(function (response: APIResponse) {
+        //     let data: Array<Object> = response.getData().links;
+        //     self.setState({
+        //         links: data
+        //     });
+        // });
     }
 
     updateLink(id: string, link: Link) {

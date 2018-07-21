@@ -19,9 +19,7 @@ export default class SearchBar extends binder(React.Component) {
         if (e.target instanceof HTMLInputElement) {
             let term = e.target.value;
 
-            if (term.length > 1) {
-                this.props.onSearch(term);
-            }
+            this.props.onSearch(term);
         }
     }
 
