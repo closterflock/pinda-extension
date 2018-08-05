@@ -82,7 +82,7 @@ export default class AuthForm extends binder(React.Component) {
 
     validateLogin(): Promise<Array<string>> {
         let self = this;
-        let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
         return new Promise(function (resolve, reject) {
             let errors: Array<string> = [];
             if (!regex.test(self.emailInput.value)) {
