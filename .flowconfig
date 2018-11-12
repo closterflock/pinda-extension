@@ -1,0 +1,15 @@
+[ignore]
+.*/node_modules/unflowify/
+.*/node_modules/flow-remove-types
+.*/node_modules/fbjs/lib/.*
+
+[include]
+src/.*
+node_modules/.*
+
+[libs]
+./flow/decls/
+
+[options]
+esproposal.class_instance_fields=ignore
+esproposal.class_static_fields=ignore
